@@ -1,0 +1,70 @@
+{
+  "title": "A list of tasks",
+  "type": "object",
+  "required": ["title"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Task list title"
+    },
+    "additional": {
+      "title": "Additional",
+      "type": "object",
+      "properties": {
+        "subtasks": {
+          "type": "array",
+          "title": "Sub Tasks",
+          "items": { "type": "string", "fieldProps": { "required": true } }
+        },
+        "date": {
+          "type": "string",
+          "title": "Date"
+        },
+        "priority": {
+          "type": "number",
+          "title": "Priority"
+        }
+      }
+    },
+    "category": {
+      "title": "Category",
+      "type": "enum",
+      "items": [
+        { "value": "a", "label": "A" },
+        { "value": "b", "label": "B" }
+      ],
+      "fieldProps": {
+        "required": true,
+        "multiple": true
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "title": "Tasks",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "A sample title",
+            "fieldProps": {
+              "required": true
+            }
+          },
+          "details": {
+            "type": "string",
+            "title": "Task details",
+            "description": "Enter the task details"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done?",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}
