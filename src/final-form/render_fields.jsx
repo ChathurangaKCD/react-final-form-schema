@@ -14,6 +14,8 @@ import {
 import { InputField } from "./components/input_field";
 import { UnsupportedField } from "./components/unsupported_field";
 import { getSubPath, getFieldName } from "./utils/schema_path_utils";
+import { CheckBoxField } from "./components/checkbox_field.";
+import { DateTimeRangePicker } from "./components/date_time_pickers";
 
 export function renderSchema(schema, path = "", level = 0) {
   console.log("Schema", schema, path);
@@ -100,7 +102,42 @@ function FieldRenderer({ schema, path, level }) {
       return <UnsupportedField {...{ schema, path }} />;
     }
     case "boolean": {
-      return <UnsupportedField {...{ schema, path }} />;
+      return (
+        <FieldWrapper level={level}>
+          <Field name={getFieldName(path)}>
+            {({ input, meta }) => (
+              <CheckBoxField
+                label={schema.title}
+                {...input}
+                {...schema.fieldProps}
+                items={schema.items}
+                error={meta.touched && meta.error}
+              ></CheckBoxField>
+            )}
+          </Field>
+        </FieldWrapper>
+      );
+    }
+    case "date":
+    case "datetime": {
+      return null;
+    }
+    case "daterange":
+    case "datetimerange": {
+      return (
+        <FieldWrapper level={level} type="datetime">
+          <Field name={getFieldName(path)}>
+            {({ input, meta }) => (
+              <DateTimeRangePicker
+                label={schema.title}
+                {...input}
+                {...schema.fieldProps}
+                error={meta.touched && meta.error}
+              />
+            )}
+          </Field>
+        </FieldWrapper>
+      );
     }
     case "enum": {
       return (

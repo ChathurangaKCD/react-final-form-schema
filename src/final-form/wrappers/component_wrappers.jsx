@@ -82,9 +82,9 @@ export function ArrayItemAddBtn({ children, onClick }) {
   );
 }
 
-export function FieldWrapper({ wrapperProps, level, children }) {
+export function FieldWrapper({ type, wrapperProps, level, children }) {
   return (
-    <Col md={level === 1 ? 12 : 3} {...wrapperProps}>
+    <Col md={level === 1 || type === "datetime" ? 12 : 3} {...wrapperProps}>
       {children}
     </Col>
   );

@@ -16,9 +16,12 @@
           "title": "Sub Tasks",
           "items": { "type": "string", "fieldProps": { "required": true } }
         },
-        "date": {
-          "type": "string",
-          "title": "Date"
+        "daterange": {
+          "type": "datetimerange",
+          "title": "Date range",
+          "fieldProps": {
+            "required": true
+          }
         },
         "priority": {
           "type": "number",
@@ -31,7 +34,14 @@
       "type": "enum",
       "items": [
         { "value": "a", "label": "A" },
-        { "value": "b", "label": "B" }
+        { "value": "b1", "label": "B1" },
+        { "value": "b2", "label": "B2" },
+        { "value": "b3", "label": "B3" },
+        { "value": "b4", "label": "B4" },
+        { "value": "c1", "label": "C1" },
+        { "value": "c2", "label": "C2" },
+        { "value": "c3", "label": "C3" },
+        { "value": "c4", "label": "C4" }
       ],
       "fieldProps": {
         "required": true,
