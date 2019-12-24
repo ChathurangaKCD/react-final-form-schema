@@ -5,7 +5,15 @@
   "properties": {
     "title": {
       "type": "string",
-      "title": "Task list title"
+      "title": "Task list title",
+      "minLength": 10
+    },
+    "desc": {
+      "type": "string",
+      "title": "Description",
+      "ui": {
+        "widget": "textarea"
+      }
     },
     "additional": {
       "title": "Additional",
@@ -16,16 +24,25 @@
           "title": "Sub Tasks",
           "items": { "type": "string", "fieldProps": { "required": true } }
         },
+        "date": {
+          "type": "date",
+          "title": "Date"
+        },
+        "datetime": {
+          "type": "datetime",
+          "title": "DateTime"
+        },
         "daterange": {
           "type": "datetimerange",
           "title": "Date range",
-          "fieldProps": {
-            "required": true
-          }
+          "fieldProps": {}
         },
         "priority": {
           "type": "number",
-          "title": "Priority"
+          "title": "Priority",
+          "fieldProps": {
+            "step": 0.01
+          }
         }
       }
     },

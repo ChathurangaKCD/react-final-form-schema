@@ -14,10 +14,10 @@ export function ObjectWrapper({ title, level, children, ...wrapperProps }) {
     );
   return (
     <Col md={12} className="ml-2">
-      <Row {...wrapperProps} className="border-left mb-2">
+      <Form.Row {...wrapperProps} className="border-left mb-2">
         {titleComp}
         {children}
-      </Row>
+      </Form.Row>
     </Col>
   );
 }
@@ -35,10 +35,10 @@ export function ArrayWrapper({ title, level, children, ...wrapperProps }) {
     );
   return (
     <Col md={12} className="ml-2">
-      <Row {...wrapperProps} className="border-left mb-2">
+      <Form.Row {...wrapperProps} className="border-left mb-2">
         {titleComp}
         {children}
-      </Row>
+      </Form.Row>
     </Col>
   );
 }
@@ -46,10 +46,10 @@ export function ArrayWrapper({ title, level, children, ...wrapperProps }) {
 export function ArrayItemWrapper({ wrapperProps, level, children, buttons }) {
   return (
     <Col md={12} className="ml-2">
-      <Row {...wrapperProps} className="border-left mb-2">
+      <Form.Row {...wrapperProps} className="border-left mb-2">
         {children}
         {buttons}
-      </Row>
+      </Form.Row>
     </Col>
   );
 }
@@ -82,9 +82,9 @@ export function ArrayItemAddBtn({ children, onClick }) {
   );
 }
 
-export function FieldWrapper({ type, wrapperProps, level, children }) {
+export function FieldWrapper({ row, wrapperProps, level, children }) {
   return (
-    <Col md={level === 1 || type === "datetime" ? 12 : 3} {...wrapperProps}>
+    <Col md={level === 1 || row ? 12 : 6} {...wrapperProps}>
       {children}
     </Col>
   );

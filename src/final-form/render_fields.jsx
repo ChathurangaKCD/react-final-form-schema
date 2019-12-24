@@ -11,11 +11,13 @@ import {
   ArrayItemAddBtn,
   ObjectItemWrapper
 } from "./wrappers/component_wrappers";
-import { InputField } from "./components/input_field";
+import { InputField, NumberField } from "./components/input_field";
 import { UnsupportedField } from "./components/unsupported_field";
 import { getSubPath, getFieldName } from "./utils/schema_path_utils";
 import { CheckBoxField } from "./components/checkbox_field.";
-import { DateTimeRangePicker } from "./components/date_time_pickers";
+import { DateTimeRangePicker } from "./components/datetime/react-datepicker/date_time_pickers";
+import { DateTimePickers } from "./components/datetime/react-widgets";
+import { minLength } from "./utils/validators";
 
 export function renderSchema(schema, path = "", level = 0) {
   console.log("Schema", schema, path);
@@ -84,7 +86,7 @@ function FieldRenderer({ schema, path, level }) {
     case "string": {
       return (
         <FieldWrapper level={level}>
-          <Field name={getFieldName(path)}>
+          <Field name={getFieldName(path)} validate={minLength(5)}>
             {({ input, meta }) => (
               <InputField
                 label={schema.title}
@@ -99,7 +101,21 @@ function FieldRenderer({ schema, path, level }) {
       );
     }
     case "number": {
-      return <UnsupportedField {...{ schema, path }} />;
+      return (
+        <FieldWrapper level={level}>
+          <Field name={getFieldName(path)}>
+            {({ input, meta }) => (
+              <NumberField
+                label={schema.title}
+                {...input}
+                {...schema.fieldProps}
+                items={schema.items}
+                error={meta.touched && meta.error}
+              ></NumberField>
+            )}
+          </Field>
+        </FieldWrapper>
+      );
     }
     case "boolean": {
       return (
@@ -120,15 +136,29 @@ function FieldRenderer({ schema, path, level }) {
     }
     case "date":
     case "datetime": {
-      return null;
-    }
-    case "daterange":
-    case "datetimerange": {
       return (
         <FieldWrapper level={level} type="datetime">
           <Field name={getFieldName(path)}>
             {({ input, meta }) => (
-              <DateTimeRangePicker
+              <DateTimePickers.DateTime
+                label={schema.title}
+                dateOnly={schema.type === "date"}
+                {...input}
+                {...schema.fieldProps}
+                error={meta.touched && meta.error}
+              />
+            )}
+          </Field>
+        </FieldWrapper>
+      );
+    }
+    case "daterange":
+    case "datetimerange": {
+      return (
+        <FieldWrapper level={level} row={true}>
+          <Field name={getFieldName(path)}>
+            {({ input, meta }) => (
+              <DateTimePickers.DateTimeRange
                 label={schema.title}
                 {...input}
                 {...schema.fieldProps}

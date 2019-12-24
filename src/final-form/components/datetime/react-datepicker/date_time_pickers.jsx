@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Form, Row, Col } from "react-bootstrap";
-// import "./date_range_picker.css";
+// import "./date_picker.scss";
 
 export function DateTimeRangePicker({
   label,
