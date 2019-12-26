@@ -6,11 +6,13 @@
     "title": {
       "type": "string",
       "title": "Task list title",
-      "minLength": 10
+      "minLength": 4,
+      "maxLength": 10
     },
     "desc": {
       "type": "string",
-      "title": "Description"
+      "title": "Description",
+      "minLength": 30
     },
     "additional": {
       "title": "Additional",
@@ -37,8 +39,15 @@
           "type": "number",
           "title": "Priority",
           "multipleOf": 0.01,
-          "max": 10,
-          "min": 3
+          "maximum": 10,
+          "minimum": 3
+        },
+        "priorityInt": {
+          "type": "integer",
+          "title": "PriorityInt",
+          "multipleOf": 10,
+          "maximum": 10,
+          "minimum": 3
         }
       }
     },
