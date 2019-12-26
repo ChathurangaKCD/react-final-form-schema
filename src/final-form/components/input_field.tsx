@@ -1,16 +1,29 @@
 import React from "react";
 import { Form } from "react-bootstrap";
+import { TextInputProps } from "./interfaces";
 
 const allowedInputWidgets = ["textarea"];
-export function TextInput({ label, error, path, uiSchema, ...otherProps }) {
-  const formControlProps = {};
+
+export function TextInput({
+  label,
+  error,
+  uiSchema,
+  input,
+  schemaProps
+}: TextInputProps) {
+  const formControlProps: any = {};
   if (uiSchema && allowedInputWidgets.includes(uiSchema["ui:widget"])) {
     formControlProps.as = uiSchema["ui:widget"];
   }
   return (
-    <Form.Group controlId={path}>
+    <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
-      <Form.Control {...otherProps} {...formControlProps} isInvalid={!!error} />
+      <Form.Control
+        {...input}
+        {...formControlProps}
+        {...schemaProps}
+        isInvalid={!!error}
+      />
       {error && (
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       )}

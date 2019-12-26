@@ -1,26 +1,28 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { CheckBoxField } from "../../components/checkbox_field.";
+import { DateTimePickers } from "../../components/datetime/react-widgets";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
 
-export function renderBooleanInput({
+interface RenderDateInputFnProps extends RenderFnProps {}
+export function renderDateInput({
   dataPath,
   schemaPath,
   uiPath,
   level,
   schema,
   uiSchema
-}) {
+}: RenderDateInputFnProps) {
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <CheckBoxField
+          <DateTimePickers.DateTime
             label={schema.title}
-            {...input}
-            {...schema.fieldProps}
-            items={schema.items}
+            dateOnly={schema.type === "date"}
+            input={input}
+            uiSchema={uiSchema}
+            required={false}
             error={meta.touched && meta.error}
           />
         )}

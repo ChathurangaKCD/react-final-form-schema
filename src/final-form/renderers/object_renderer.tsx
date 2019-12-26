@@ -15,7 +15,12 @@ import { SchemaRenderer } from "./schema_renderer";
  * Render Object Type
  * @param {*} param0
  */
-export function ObjectRenderer({ dataPath, schemaPath, uiPath, level }) {
+export function ObjectRenderer({
+  dataPath,
+  schemaPath,
+  uiPath,
+  level
+}: ObjectRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const { title, properties: schemaObj } = schema;
   return (
@@ -25,7 +30,7 @@ export function ObjectRenderer({ dataPath, schemaPath, uiPath, level }) {
         const dataSubPath = getDataSubPath(dataPath, key);
         const uiSubPath = getUiSubPath(uiPath, key);
         return (
-          <ObjectItemWrapper key={dataSubPath}>
+          <ObjectItemWrapper key={dataSubPath} level={level + 1}>
             <SchemaRenderer
               dataPath={dataSubPath}
               schemaPath={schemaSubPath}

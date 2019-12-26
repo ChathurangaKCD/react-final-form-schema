@@ -1,11 +1,12 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Form } from "react-bootstrap";
+import { DatePicker, DateTimePicker } from "react-widgets";
 import dateFnsLocalizer from "react-widgets-date-fns";
-import { DateTimePicker, DatePicker } from "react-widgets";
+import { DateTimePickerProps } from "../../interfaces";
 import "./date_time_picker.scss";
 dateFnsLocalizer();
 
-function useParsedDate(value) {
+function useParsedDate(value: number | null) {
   return useMemo(() => {
     return !!value ? new Date(value) : null;
   }, [value]);
@@ -13,15 +14,13 @@ function useParsedDate(value) {
 
 export function CustomDateTimePicker({
   label,
-  value,
   min = null,
   max = null,
-  onChange,
-  required,
-  onBlur,
+  input: { name, onChange, value, ...input },
   readOnly = false,
-  dateOnly = false
-}) {
+  dateOnly = false,
+  required = false
+}: DateTimePickerProps) {
   const inComingValue = useParsedDate(value);
   const inComingMinValue = useParsedDate(min);
   const inComingMaxValue = useParsedDate(max);
@@ -37,10 +36,9 @@ export function CustomDateTimePicker({
   // for (let i=0; i<widgets.length; i++) {
   //   widgets[i].readOnly = true;
   // }
-  const props = {
+  const props: any = {
     value: inComingValue,
     onChange: onChangeValue,
-    onBlur,
     required,
     readOnly
   };
@@ -56,6 +54,7 @@ export function CustomDateTimePicker({
       {label && <Form.Label className="float-left">{label}</Form.Label>}
       <Picker
         {...props}
+        {...input}
         // containerClassName={"col-md-4"}
       />
     </Form.Group>

@@ -12,6 +12,8 @@ import {
 } from "../wrappers/component_wrappers";
 import { renderEnumSelect } from "./fields/enum_select";
 import { SchemaRenderer } from "./schema_renderer";
+import { FormApi } from "final-form";
+import { Schema, UiSchema } from "../interfaces";
 
 /**
  * Render Array Type
@@ -21,13 +23,32 @@ import { SchemaRenderer } from "./schema_renderer";
  * * fixed item arrays => render each item schema
  * @param {*} param0
  */
-export function ArrayRenderer({ dataPath, schemaPath, uiPath, level }) {
+export function ArrayRenderer({
+  dataPath,
+  schemaPath,
+  uiPath,
+  level
+}: ArrayRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const formApi = useForm();
   if (Array.isArray(schema.items)) {
-    return renderFixedItemList({ schema });
+    return renderFixedItemList({
+      schema,
+      uiSchema,
+      dataPath,
+      schemaPath,
+      uiPath,
+      level
+    });
   } else if (schema.items.enum) {
-    return renderEnumSelect({ schema, uiSchema, path: dataPath, level });
+    return renderEnumSelect({
+      schema,
+      uiSchema,
+      dataPath,
+      uiPath,
+      schemaPath,
+      level
+    });
   } else
     return renderNestedArray({
       level,
@@ -40,6 +61,12 @@ export function ArrayRenderer({ dataPath, schemaPath, uiPath, level }) {
     });
 }
 
+interface RenderNestedArrayProps extends RenderFnProps {
+  schema: Schema;
+  uiSchema: UiSchema;
+  formApi: FormApi;
+}
+
 function renderNestedArray({
   schema,
   uiSchema,
@@ -48,15 +75,18 @@ function renderNestedArray({
   schemaPath,
   uiPath,
   formApi
-}) {
+}: RenderNestedArrayProps) {
   const { title } = schema;
   return (
     <ArrayWrapper title={title} level={level}>
-      <FieldArray name={dataPath}>
+      {/* subscribe only to array length; 
+        if reordering needed subscribe to value */}
+      <FieldArray name={dataPath} subscription={{}} validate={undefined}>
         {({ fields }) =>
           fields.map((name, index) => (
             <ArrayItemWrapper
               key={name}
+              level={level + 1}
               buttons={
                 <ArrayItemRemoveBtn onClick={() => fields.remove(index)} />
               }
@@ -82,7 +112,11 @@ function renderNestedArray({
   );
 }
 
-function renderFixedItemList({ schema, path }) {
-  const props = { schema, path };
+interface RenderFixedItemListProps extends RenderFnProps {
+  schema: Schema;
+}
+
+function renderFixedItemList({ schema, dataPath }: RenderFixedItemListProps) {
+  const props = { schema, path: dataPath };
   return <UnsupportedField {...props}></UnsupportedField>;
 }

@@ -1,13 +1,14 @@
 import React, { useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CustomDateTimePicker } from "./date_time_picker";
+import { DateTimeRangePickerProps } from "../../interfaces";
 
 export function CustomDateTimeRangePicker({
   label,
-  value,
-  onChange,
+  input: { value, onChange, ...input },
+  required,
   dateOnly
-}) {
+}: DateTimeRangePickerProps) {
   const [startTimeStamp, endTimestamp] = value;
   const onChangeStart = useCallback(
     val => {
@@ -25,16 +26,24 @@ export function CustomDateTimeRangePicker({
     <Row>
       <Col>
         <CustomDateTimePicker
-          value={startTimeStamp}
-          onChange={onChangeStart}
+          input={{ value: startTimeStamp, onChange: onChangeStart, ...input }}
           max={endTimestamp}
+          required={required}
+          dateOnly={dateOnly}
+          uiSchema={null}
+          error={false}
+          label="from"
         ></CustomDateTimePicker>
       </Col>
       <Col>
         <CustomDateTimePicker
-          value={endTimestamp}
-          onChange={onChangeEnd}
+          input={{ value: endTimestamp, onChange: onChangeEnd, ...input }}
           min={startTimeStamp}
+          required={required}
+          dateOnly={dateOnly}
+          uiSchema={null}
+          error={false}
+          label="to"
         ></CustomDateTimePicker>
       </Col>
     </Row>

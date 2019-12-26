@@ -4,6 +4,7 @@ import { Form, FormSpy } from "react-final-form";
 import { SchemaRenderer } from "./renderers/schema_renderer";
 import { SchemaContextProvider } from "./schema_context";
 import { FormWrapper } from "./wrappers/component_wrappers";
+import { SchemaFormProps } from "./interfaces";
 
 export function SchemaForm({
   schema,
@@ -11,7 +12,7 @@ export function SchemaForm({
   initialValues = {},
   onSubmit,
   onValueChange
-}) {
+}: SchemaFormProps) {
   return (
     <SchemaContextProvider schema={schema} uiSchema={uiSchema}>
       <Form
@@ -24,7 +25,7 @@ export function SchemaForm({
         render={({ handleSubmit, form, submitting, pristine }) => {
           return (
             <FormWrapper onSubmit={handleSubmit}>
-              <SchemaRenderer />
+              <SchemaRenderer dataPath="" schemaPath="" uiPath="" level={0} />
               <div className="buttons">
                 <button type="submit" disabled={submitting || pristine}>
                   Submit
