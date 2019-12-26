@@ -20,11 +20,10 @@ export function renderTextInput({
         {({ input, meta }) => (
           <TextInput
             label={schema.title}
-            path={dataPath}
             error={meta.touched && meta.error}
             uiSchema={uiSchema}
-            {...input}
-            {...parseTextInputSchema(schema)}
+            input={input}
+            schemaProps={parseTextInputSchema(schema)}
           />
         )}
       </Field>

@@ -19,8 +19,7 @@ export function renderDateInput({
           <DateTimePickers.DateTime
             label={schema.title}
             dateOnly={schema.type === "date"}
-            {...input}
-            {...schema.fieldProps}
+            input={input}
             error={meta.touched && meta.error}
           />
         )}

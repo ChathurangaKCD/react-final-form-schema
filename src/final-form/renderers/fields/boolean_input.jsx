@@ -18,9 +18,8 @@ export function renderBooleanInput({
         {({ input, meta }) => (
           <CheckBoxField
             label={schema.title}
-            {...input}
+            input={input}
             {...schema.fieldProps}
-            items={schema.items}
             error={meta.touched && meta.error}
           />
         )}

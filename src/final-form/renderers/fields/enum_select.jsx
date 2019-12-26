@@ -21,8 +21,7 @@ export function renderEnumSelect({ schema, uiSchema, path, level }) {
         {({ input, meta }) => (
           <SelectField
             label={schema.title}
-            {...input}
-            {...schema.fieldProps}
+            input={input}
             optionValues={optionValues}
             optionLabels={optionLabels}
             multiple={isMultiple}

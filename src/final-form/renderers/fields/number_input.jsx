@@ -20,8 +20,8 @@ export function renderNumberInput({
         {({ input, meta }) => (
           <NumberInput
             label={schema.title}
-            {...input}
-            {...parseNumberInputSchema(schema)}
+            input={input}
+            schemaProps={parseNumberInputSchema(schema)}
             error={meta.touched && meta.error}
           />
         )}

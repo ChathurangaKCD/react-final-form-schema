@@ -46,8 +46,7 @@ export function FieldRenderer(props) {
               <DateTimePickers.DateTimeRange
                 label={schema.title}
                 dateOnly={schema.type === "date"}
-                {...input}
-                {...schema.fieldProps}
+                input={input}
                 error={meta.touched && meta.error}
               />
             )}

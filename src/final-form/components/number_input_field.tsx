@@ -1,16 +1,15 @@
 import React, { useCallback } from "react";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
+import { NumberInputProps } from "./interfaces";
 
 export function NumberInput({
   label,
   error,
-  path,
   uiSchema,
-  value: inComingValue,
-  onChange: notifyChange,
-  ...otherProps
-}) {
+  input: { value: inComingValue, onChange: notifyChange, ...input },
+  schemaProps
+}: NumberInputProps) {
   const [value, setValue] = useState(inComingValue);
   const onChange = useCallback(
     e => {
@@ -25,11 +24,12 @@ export function NumberInput({
     [inComingValue, notifyChange]
   );
   return (
-    <Form.Group controlId={path}>
+    <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
       <Form.Control
         type="number"
-        {...otherProps}
+        {...input}
+        {...schemaProps}
         isInvalid={!!error}
         value={value}
         onChange={onChange}
