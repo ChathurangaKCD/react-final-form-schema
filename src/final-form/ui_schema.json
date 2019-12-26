@@ -1,0 +1,18 @@
+{
+  "ui:title": "A list of tasks",
+  "title": {
+    "ui:title": "Task list title"
+  },
+  "desc": {
+    "ui:description": "Description text",
+    "ui:widget": "textarea"
+  },
+  "additional": {
+    "datetime": {},
+    "daterange": {
+      "ui:widget": "datetimerange",
+      "title": "Date range"
+    },
+    "priority": {}
+  }
+}

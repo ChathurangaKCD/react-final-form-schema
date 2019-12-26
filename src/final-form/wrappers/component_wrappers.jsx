@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import RenderCount from "../utils/render_count";
 
 export function FormWrapper({ children, ...otherProps }) {
   return <Form {...otherProps}>{children}</Form>;
@@ -14,6 +15,7 @@ export function ObjectWrapper({ title, level, children, ...wrapperProps }) {
     );
   return (
     <Col md={12} className="ml-2">
+      <RenderCount></RenderCount>
       <Form.Row {...wrapperProps} className="border-left mb-2">
         {titleComp}
         {children}
@@ -43,11 +45,24 @@ export function ArrayWrapper({ title, level, children, ...wrapperProps }) {
   );
 }
 
-export function ArrayItemWrapper({ wrapperProps, level, children, buttons }) {
+export function ArrayItemWrapper({
+  wrapperProps,
+  isField,
+  level,
+  children,
+  buttons
+}) {
+  const wrappedChildren = isField ? (
+    children
+  ) : (
+    <Col md={10}>
+      <Row>{children}</Row>
+    </Col>
+  );
   return (
     <Col md={12} className="ml-2">
       <Form.Row {...wrapperProps} className="border-left mb-2">
-        {children}
+        {wrappedChildren}
         {buttons}
       </Form.Row>
     </Col>

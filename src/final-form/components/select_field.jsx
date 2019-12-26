@@ -28,10 +28,17 @@ export function SimpleSelectField({
 
 function useTransformSelecteProps({
   value: selected,
-  items: options,
+  optionValues,
+  optionLabels = [],
   onChange: onChangeValue,
   multiple: isMultiSelect = false
 }) {
+  const options = useMemo(() => {
+    return optionValues.map((val, idx) => ({
+      label: optionLabels[idx] || val,
+      value: val
+    }));
+  }, [optionValues, optionLabels]);
   const mapFn = useMemo(() => {
     const optionMap = new Map(options.map(opt => [opt.value, opt]));
     return optValue => optionMap.get(optValue);
@@ -68,13 +75,19 @@ export function SelectField({ label, error, path, ...otherProps }) {
   );
 }
 
-export function MultiSelectField({ label, error, path, items, ...otherProps }) {
-  const mappedProps = useTransformSelecteProps(otherProps);
-  const props = { ...otherProps, ...mappedProps };
-  return (
-    <Form.Group controlId={path}>
-      {label && <Form.Label className="float-left">{label}</Form.Label>}
-      <Select isMulti isSearchable={true} {...props} />
-    </Form.Group>
-  );
-}
+// export function MultiSelectField({
+//   label,
+//   error,
+//   path,
+//   isMulti,
+//   ...otherProps
+// }) {
+//   const mappedProps = useTransformSelecteProps(otherProps);
+//   const props = { ...otherProps, ...mappedProps };
+//   return (
+//     <Form.Group controlId={path}>
+//       {label && <Form.Label className="float-left">{label}</Form.Label>}
+//       <Select isMulti isSearchable={true} {...props} />
+//     </Form.Group>
+//   );
+// }

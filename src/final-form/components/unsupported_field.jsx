@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Col } from "react-bootstrap";
 
-export function UnsupportedField({ schema, path }) {
+export function UnsupportedField({ schema, uiSchema, path }) {
   return (
     <Col md={12}>
       <Alert variant="danger">
