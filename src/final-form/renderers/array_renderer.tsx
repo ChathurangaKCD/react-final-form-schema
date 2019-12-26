@@ -79,7 +79,9 @@ function renderNestedArray({
   const { title } = schema;
   return (
     <ArrayWrapper title={title} level={level}>
-      <FieldArray name={dataPath}>
+      {/* subscribe only to array length; 
+        if reordering needed subscribe to value */}
+      <FieldArray name={dataPath} subscription={{}} validate={undefined}>
         {({ fields }) =>
           fields.map((name, index) => (
             <ArrayItemWrapper
