@@ -1,11 +1,10 @@
 import { FieldInputProps } from "react-final-form";
+import { UiSchema } from "../interfaces";
 
 export interface FieldProps {
   label: string;
   error: string | false;
-  uiSchema: {
-    [x: string]: any;
-  } | null;
+  uiSchema: UiSchema;
   input: FieldInputProps<any, HTMLElement>;
 }
 

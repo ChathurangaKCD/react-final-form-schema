@@ -15,14 +15,14 @@ import { renderNumberInput } from "./fields/number_input";
  * Render Fields
  * @param {*} param0
  */
-export function FieldRenderer(props) {
+export function FieldRenderer(props: FieldRendererProps) {
   const { dataPath, schemaPath, uiPath, level } = props;
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const renderData = { ...props, schema, uiSchema };
   switch (schema.type) {
     case "string": {
       if (schema.type === "string" && Array.isArray(schema.enum)) {
-        return renderEnumSelect({ schema, uiSchema, path: dataPath, level });
+        return renderEnumSelect(renderData);
       }
       return renderTextInput(renderData);
     }
@@ -40,13 +40,15 @@ export function FieldRenderer(props) {
     case "daterange":
     case "datetimerange": {
       return (
-        <FieldWrapper level={level} row={true}>
+        <FieldWrapper level={level} isRow={true}>
           <Field name={getFieldName(dataPath)}>
             {({ input, meta }) => (
               <DateTimePickers.DateTimeRange
                 label={schema.title}
                 dateOnly={schema.type === "date"}
                 input={input}
+                uiSchema={uiSchema}
+                required={false}
                 error={meta.touched && meta.error}
               />
             )}

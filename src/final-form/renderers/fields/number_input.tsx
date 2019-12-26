@@ -4,7 +4,9 @@ import { NumberInput } from "../../components/number_input_field";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
 import { validators, composeValidators } from "../../utils/validators";
+import { Schema } from "../../interfaces";
 
+interface RenderNumberInputFnProps extends RenderFnProps {}
 export function renderNumberInput({
   dataPath,
   schemaPath,
@@ -12,16 +14,17 @@ export function renderNumberInput({
   level,
   schema,
   uiSchema
-}) {
+}: RenderNumberInputFnProps) {
   const validators = getValidators(schema);
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <NumberInput
             label={schema.title}
             input={input}
             schemaProps={parseNumberInputSchema(schema)}
+            uiSchema={uiSchema}
             error={meta.touched && meta.error}
           />
         )}
@@ -30,15 +33,15 @@ export function renderNumberInput({
   );
 }
 
-const IFTE = (condition, val = condition, elseVal = undefined) =>
-  condition ? val : elseVal;
+const IFTE = (condition: any, val: any = condition, elseVal: any = undefined) =>
+  !!condition ? val : elseVal;
 
-function parseNumberInputSchema(schema) {
+function parseNumberInputSchema(schema: Schema) {
   const { multipleOf, maximum, minimum, type } = schema;
   const props = {
     step: IFTE(
       type === "integer",
-      IFTE(multipleOf, multipleOf, "1"),
+      IFTE(multipleOf, multipleOf, 1),
       IFTE(multipleOf)
     ),
     min: IFTE(minimum),
@@ -47,8 +50,9 @@ function parseNumberInputSchema(schema) {
   return props;
 }
 
-const numberValidators = ["minimum", "maximum"];
-function getValidators(schema) {
+const numberValidators = ["minimum", "maximum"] as const;
+
+function getValidators(schema: Schema) {
   const _validators = numberValidators
     .map(
       key =>

@@ -15,7 +15,7 @@ export function SchemaRenderer({
   schemaPath = "",
   uiPath = "",
   level = 0
-}) {
+}: SchemaRendererProps) {
   console.log("SchemaRenderer", schemaPath, dataPath, uiPath);
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const props = { dataPath, schemaPath, uiPath, level };

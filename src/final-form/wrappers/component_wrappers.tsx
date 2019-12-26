@@ -1,12 +1,22 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import RenderCount from "../utils/render_count";
+import {
+  ArrayItemAddBtnProps,
+  ArrayItemRemoveBtnProps,
+  ArrayItemWrapperProps,
+  ArrayWrapperProps,
+  FieldWrapperProps,
+  FormWrapperProps,
+  ObjectItemWrapperProps,
+  ObjectWrapperProps
+} from "./interfaces";
 
-export function FormWrapper({ children, ...otherProps }) {
+export function FormWrapper({ children, ...otherProps }: FormWrapperProps) {
   return <Form {...otherProps}>{children}</Form>;
 }
 
-export function ObjectWrapper({ title, level, children, ...wrapperProps }) {
+export function ObjectWrapper({ title, level, children }: ObjectWrapperProps) {
   const titleComp =
     level === 0 && title ? null : (
       <Col md={12}>
@@ -16,7 +26,7 @@ export function ObjectWrapper({ title, level, children, ...wrapperProps }) {
   return (
     <Col md={12} className="ml-2">
       <RenderCount></RenderCount>
-      <Form.Row {...wrapperProps} className="border-left mb-2">
+      <Form.Row className="border-left mb-2">
         {titleComp}
         {children}
       </Form.Row>
@@ -24,11 +34,20 @@ export function ObjectWrapper({ title, level, children, ...wrapperProps }) {
   );
 }
 
-export function ObjectItemWrapper({ wrapperProps, level, children }) {
+export function ObjectItemWrapper({
+  level,
+  children,
+  ...wrapperProps
+}: ObjectItemWrapperProps) {
   return children;
 }
 
-export function ArrayWrapper({ title, level, children, ...wrapperProps }) {
+export function ArrayWrapper({
+  title,
+  level,
+  children,
+  ...wrapperProps
+}: ArrayWrapperProps) {
   const titleComp =
     level === 0 && title ? null : (
       <Col md={12}>
@@ -46,12 +65,12 @@ export function ArrayWrapper({ title, level, children, ...wrapperProps }) {
 }
 
 export function ArrayItemWrapper({
-  wrapperProps,
-  isField,
+  isField = false,
   level,
   children,
-  buttons
-}) {
+  buttons,
+  ...wrapperProps
+}: ArrayItemWrapperProps) {
   const wrappedChildren = isField ? (
     children
   ) : (
@@ -69,7 +88,10 @@ export function ArrayItemWrapper({
   );
 }
 
-export function ArrayItemRemoveBtn({ children, onClick }) {
+export function ArrayItemRemoveBtn({
+  children,
+  onClick
+}: ArrayItemRemoveBtnProps) {
   return (
     <Col md={2}>
       <Button
@@ -87,7 +109,7 @@ export function ArrayItemRemoveBtn({ children, onClick }) {
   );
 }
 
-export function ArrayItemAddBtn({ children, onClick }) {
+export function ArrayItemAddBtn({ children, onClick }: ArrayItemAddBtnProps) {
   return (
     <Col md={12}>
       <Button variant="info" onClick={onClick}>
@@ -97,9 +119,14 @@ export function ArrayItemAddBtn({ children, onClick }) {
   );
 }
 
-export function FieldWrapper({ row, wrapperProps, level, children }) {
+export function FieldWrapper({
+  isRow,
+  level,
+  children,
+  ...wrapperProps
+}: FieldWrapperProps) {
   return (
-    <Col md={level === 1 || row ? 12 : 6} {...wrapperProps}>
+    <Col md={level === 1 || isRow ? 12 : 6} {...wrapperProps}>
       {children}
     </Col>
   );

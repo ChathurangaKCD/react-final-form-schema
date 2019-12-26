@@ -4,7 +4,9 @@ import { TextInput } from "../../components/input_field";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { composeValidators, validators } from "../../utils/validators";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
+import { Schema } from "../../interfaces";
 
+interface RenderTextInputFnProps extends RenderFnProps {}
 export function renderTextInput({
   dataPath,
   schemaPath,
@@ -12,10 +14,10 @@ export function renderTextInput({
   level,
   schema,
   uiSchema
-}) {
+}: RenderTextInputFnProps) {
   const validators = getValidators(schema);
   return (
-    <FieldWrapper level={level} uiSchema={uiSchema}>
+    <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <TextInput
@@ -31,10 +33,10 @@ export function renderTextInput({
   );
 }
 
-const IFTE = (condition, val = condition, elseVal = undefined) =>
-  condition ? val : elseVal;
+const IFTE = (condition: any, val: any = condition, elseVal: any = undefined) =>
+  !!condition ? val : elseVal;
 
-function parseTextInputSchema(schema) {
+function parseTextInputSchema(schema: Schema) {
   const { minLength, maxLength } = schema;
   const props = {
     minlength: IFTE(minLength),
@@ -43,8 +45,9 @@ function parseTextInputSchema(schema) {
   return props;
 }
 
-const textValidators = ["minLength", "maxLength"];
-function getValidators(schema) {
+const textValidators = ["minLength", "maxLength"] as const;
+
+function getValidators(schema: Schema) {
   const _validators = textValidators
     .map(
       key =>

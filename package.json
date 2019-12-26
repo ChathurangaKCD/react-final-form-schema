@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.24",
+    "@types/lodash.get": "^4.4.6",
     "@types/node": "^13.1.0",
     "@types/react": "^16.9.17",
     "@types/react-bootstrap": "^0.32.20",
