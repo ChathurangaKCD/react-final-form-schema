@@ -39,8 +39,8 @@ const IFTE = (condition: any, val: any = condition, elseVal: any = undefined) =>
 function parseTextInputSchema(schema: Schema) {
   const { minLength, maxLength } = schema;
   const props = {
-    minlength: IFTE(minLength),
-    maxlength: IFTE(maxLength)
+    minLength: IFTE(minLength),
+    maxLength: IFTE(maxLength)
   };
   return props;
 }

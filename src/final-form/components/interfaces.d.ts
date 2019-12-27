@@ -10,8 +10,8 @@ export interface FieldProps {
 
 export interface TextInputProps extends FieldProps {
   schemaProps: {
-    minlength?: number;
-    maxlength?: number;
+    minLength?: number;
+    maxLength?: number;
     pattern?: string;
   };
 }
