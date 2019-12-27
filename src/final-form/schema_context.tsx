@@ -17,8 +17,8 @@ export function SchemaContextProvider({
   defs = null,
   children
 }: SchemaContextProps) {
-  const countRef = useRef(0);
   if (!schema) throw new Error("SCHEMA_REQUIRED");
+  const countRef = useRef(0);
   const contextVal = useMemo(() => {
     countRef.current !== 0 && console.warn("Schema Context Changed");
     countRef.current++;

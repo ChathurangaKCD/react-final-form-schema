@@ -51,6 +51,8 @@ export function ReactDateRangePicker({
         onFocusChange={setFocuedInput}
         isOutsideRange={() => false}
         small={true}
+        // minDate={moment}
+        // maxDate={moment}
       />
     </Form.Group>
   );
