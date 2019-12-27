@@ -32,8 +32,12 @@
           "title": "DateTime"
         },
         "daterange": {
-          "type": "datetimerange",
+          "type": "daterange",
           "title": "Date range"
+        },
+        "datetimerange": {
+          "type": "datetimerange",
+          "title": "Datetime range"
         },
         "priority": {
           "type": "number",

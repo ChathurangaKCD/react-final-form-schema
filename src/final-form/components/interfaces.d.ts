@@ -42,3 +42,8 @@ export interface DateTimeRangePickerProps extends FieldProps {
   readOnly?: boolean;
   required: boolean;
 }
+
+export interface DateRangePickerProps extends FieldProps {
+  min?: number | null;
+  max?: number | null;
+}
