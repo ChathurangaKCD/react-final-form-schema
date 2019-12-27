@@ -1,15 +1,15 @@
 import React from "react";
-import { Field } from "react-final-form";
-import { DateTimePickers } from "../components/datetime/react-widgets";
 import { UnsupportedField } from "../components/unsupported_field";
 import { useFormSchema } from "../schema_context";
-import { getFieldName } from "../utils/schema_path_utils";
-import { FieldWrapper } from "../wrappers/component_wrappers";
-import { renderEnumSelect } from "./fields/enum_select";
-import { renderTextInput } from "./fields/text_input";
 import { renderBooleanInput } from "./fields/boolean_input";
-import { renderDateInput } from "./fields/date_input";
+import { renderDateInput, renderDateTimeInput } from "./fields/date_input";
+import {
+  renderDateRangeInput,
+  renderDateTimeRangeInput
+} from "./fields/date_range_input";
+import { renderEnumSelect } from "./fields/enum_select";
 import { renderNumberInput } from "./fields/number_input";
+import { renderTextInput } from "./fields/text_input";
 
 /**
  * Render Fields
@@ -33,28 +33,17 @@ export function FieldRenderer(props: FieldRendererProps) {
     case "boolean": {
       return renderBooleanInput(renderData);
     }
-    case "date":
-    case "datetime": {
+    case "date": {
       return renderDateInput(renderData);
     }
-    case "daterange":
+    case "datetime": {
+      return renderDateTimeInput(renderData);
+    }
+    case "daterange": {
+      return renderDateRangeInput(renderData);
+    }
     case "datetimerange": {
-      return (
-        <FieldWrapper level={level} isRow={true}>
-          <Field name={getFieldName(dataPath)}>
-            {({ input, meta }) => (
-              <DateTimePickers.DateTimeRange
-                label={schema.title}
-                dateOnly={schema.type === "date"}
-                input={input}
-                uiSchema={uiSchema}
-                required={false}
-                error={meta.touched && meta.error}
-              />
-            )}
-          </Field>
-        </FieldWrapper>
-      );
+      return renderDateTimeRangeInput(renderData);
     }
     default:
       return <UnsupportedField {...{ schema, uiSchema, path: dataPath }} />;

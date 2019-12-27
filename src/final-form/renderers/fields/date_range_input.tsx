@@ -1,12 +1,12 @@
 import React from "react";
 import { Field } from "react-final-form";
+import { ReactDateRangePicker } from "../../components/datetime/react-dates/date_range_picker";
 import { DateTimePickers } from "../../components/datetime/react-widgets";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
-import { ReactDatePicker } from "./../../components/datetime/react-dates/date_picker";
 interface RenderDateInputFnProps extends RenderFnProps {}
 
-export function renderDateInput({
+export function renderDateRangeInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -18,7 +18,7 @@ export function renderDateInput({
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <ReactDatePicker
+          <ReactDateRangePicker
             label={schema.title}
             input={input}
             uiSchema={uiSchema}
@@ -29,7 +29,8 @@ export function renderDateInput({
     </FieldWrapper>
   );
 }
-export function renderDateTimeInput({
+
+export function renderDateTimeRangeInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -41,7 +42,7 @@ export function renderDateTimeInput({
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <DateTimePickers.DateTime
+          <DateTimePickers.DateTimeRange
             label={schema.title}
             dateOnly={schema.type === "date"}
             input={input}

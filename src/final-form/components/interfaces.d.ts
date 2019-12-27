@@ -10,8 +10,8 @@ export interface FieldProps {
 
 export interface TextInputProps extends FieldProps {
   schemaProps: {
-    minlength?: number;
-    maxlength?: number;
+    minLength?: number;
+    maxLength?: number;
     pattern?: string;
   };
 }
@@ -41,4 +41,9 @@ export interface DateTimeRangePickerProps extends FieldProps {
   dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
+}
+
+export interface DateRangePickerProps extends FieldProps {
+  min?: number | null;
+  max?: number | null;
 }

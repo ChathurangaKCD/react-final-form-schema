@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo } from "react";
-import { Form } from "react-bootstrap";
-import { DatePicker, DateTimePicker } from "react-widgets";
-import dateFnsLocalizer from "react-widgets-date-fns";
-import { DateTimePickerProps } from "../../interfaces";
-import "./date_time_picker.scss";
+import React, { useCallback, useMemo } from 'react';
+import { Form } from 'react-bootstrap';
+import { DatePicker, DateTimePicker } from 'react-widgets';
+import dateFnsLocalizer from 'react-widgets-date-fns';
+import { DateTimePickerProps } from '../../interfaces';
+// import "./date_time_picker.scss";
 dateFnsLocalizer();
 
 function useParsedDate(value: number | null) {
@@ -19,7 +19,7 @@ export function CustomDateTimePicker({
   input: { name, onChange, value, ...input },
   readOnly = false,
   dateOnly = false,
-  required = false
+  required = false,
 }: DateTimePickerProps) {
   const inComingValue = useParsedDate(value);
   const inComingMinValue = useParsedDate(min);
@@ -40,7 +40,7 @@ export function CustomDateTimePicker({
     value: inComingValue,
     onChange: onChangeValue,
     required,
-    readOnly
+    readOnly,
   };
   if (inComingMinValue) {
     props.min = inComingMinValue;

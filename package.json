@@ -1,11 +1,48 @@
 {
-  "name": "form-gen",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --env=jsdom --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-widgets": ">=4.4.11",
+    "react-dom": ">=16.12.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "form-schema-lib",
+  "author": "Chathuranga Dassanayake",
+  "module": "dist/form-schema-lib.esm.js",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.8.0",
     "@material-ui/pickers": "^3.2.8",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -17,10 +54,12 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-select": "^3.0.8",
     "@types/react-widgets": "^4.4.0",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.4.1",
     "date-fns": "^2.0.0-beta.5",
     "final-form": "^4.18.6",
     "final-form-arrays": "^3.0.2",
+    "husky": "^3.1.0",
     "lodash.get": "^4.4.2",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
@@ -35,27 +74,15 @@
     "react-select": "^3.0.8",
     "react-widgets": "^4.4.11",
     "react-widgets-date-fns": "^4.0.26",
+    "ts-loader": "^6.2.1",
+    "tsdx": "^0.12.0",
+    "tslib": "^1.10.0",
     "typescript": "^3.7.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "autoprefixer": "^9.7.3",
+    "cssnano": "^4.1.10",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3"
   }
 }

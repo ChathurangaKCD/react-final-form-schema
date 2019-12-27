@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import RenderCount from "../utils/render_count";
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -25,7 +24,6 @@ export function ObjectWrapper({ title, level, children }: ObjectWrapperProps) {
     );
   return (
     <Col md={12} className="ml-2">
-      <RenderCount></RenderCount>
       <Form.Row className="border-left mb-2">
         {titleComp}
         {children}
