@@ -1,11 +1,14 @@
-import React, { useMemo, useContext, useRef } from "react";
+import Ajv from "ajv";
 import _get from "lodash.get";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
+  Schema,
   SchemaContextProps,
   SchemaContextValue,
-  Schema,
   UiSchema
 } from "./interfaces";
+
+const ajv = new Ajv();
 
 const FormSchemaContext = React.createContext<SchemaContextValue>(
   (null as unknown) as SchemaContextValue
@@ -18,12 +21,20 @@ export function SchemaContextProvider({
   children
 }: SchemaContextProps) {
   if (!schema) throw new Error("SCHEMA_REQUIRED");
+  const [valid, setValidity] = useState(true);
+  useEffect(() => {
+    const valid = ajv.validateSchema(schema);
+    setValidity(true);
+    console.log("Validity", valid);
+    return setValidity(true);
+  }, [schema]);
   const countRef = useRef(0);
   const contextVal = useMemo(() => {
     countRef.current !== 0 && console.warn("Schema Context Changed");
     countRef.current++;
     return { schema, uiSchema };
   }, [schema, uiSchema]);
+  if (!valid) return <h5>"Schema Error"</h5>;
   return (
     <FormSchemaContext.Provider value={contextVal}>
       {children}
