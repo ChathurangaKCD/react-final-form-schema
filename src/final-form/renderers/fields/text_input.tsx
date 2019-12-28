@@ -1,12 +1,15 @@
 import React from "react";
 import { Field } from "react-final-form";
 import { TextInput } from "../../components/input_field";
-import { getFieldName } from "../../utils/schema_path_utils";
-import { composeValidators, validators } from "../../utils/validators";
-import { FieldWrapper } from "../../wrappers/component_wrappers";
 import { Schema } from "../../interfaces";
+import { getFieldName } from "../../utils/schema_path_utils";
+import { FieldWrapper } from "../../wrappers/component_wrappers";
+import { getValidators } from "../../utils/validators";
 
 interface RenderTextInputFnProps extends RenderFnProps {}
+
+const textValidators = ["minLength", "maxLength"];
+
 export function renderTextInput({
   dataPath,
   schemaPath,
@@ -15,7 +18,7 @@ export function renderTextInput({
   schema,
   uiSchema
 }: RenderTextInputFnProps) {
-  const validators = getValidators(schema);
+  const validators = getValidators(schema, textValidators);
   return (
     <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>
@@ -43,19 +46,4 @@ function parseTextInputSchema(schema: Schema) {
     maxLength: IFTE(maxLength)
   };
   return props;
-}
-
-const textValidators = ["minLength", "maxLength"] as const;
-
-function getValidators(schema: Schema) {
-  const _validators = textValidators
-    .map(
-      key =>
-        schema[key] !== undefined &&
-        validators[key] !== undefined &&
-        validators[key](schema[key])
-    )
-    .filter(validator => typeof validator === "function");
-  const validate = composeValidators(..._validators);
-  return { validate };
 }
