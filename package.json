@@ -2,6 +2,28 @@
   "name": "form-gen",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "build": "react-scripts build",
+    "postinstall": "yarn sort",
+    "sort": "npx sort-package-json",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.8.0",
@@ -38,26 +60,5 @@
     "react-widgets": "^4.4.11",
     "react-widgets-date-fns": "^4.0.26",
     "typescript": "^3.7.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
