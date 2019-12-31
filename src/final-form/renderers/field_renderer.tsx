@@ -21,7 +21,7 @@ export function FieldRenderer(props: FieldRendererProps) {
   const renderData = { ...props, schema, uiSchema };
   switch (schema.type) {
     case "string": {
-      if (schema.type === "string" && Array.isArray(schema.enum)) {
+      if (Array.isArray(schema.enum)) {
         return renderEnumSelect(renderData);
       }
       return renderTextInput(renderData);

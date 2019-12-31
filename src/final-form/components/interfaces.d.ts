@@ -47,3 +47,7 @@ export interface DateRangePickerProps extends FieldProps {
   min?: number | null;
   max?: number | null;
 }
+export interface DatePickerProps extends FieldProps {
+  min?: number | null;
+  max?: number | null;
+}

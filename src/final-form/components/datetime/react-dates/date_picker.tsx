@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import { DateRangePickerProps } from "./../../interfaces";
+import { DatePickerProps } from "./../../interfaces";
 import { Form } from "react-bootstrap";
 
 type Date = moment.Moment | null;
@@ -11,7 +11,7 @@ type Date = moment.Moment | null;
 export function ReactDatePicker({
   label,
   input: { value, onChange, ...input }
-}: DateRangePickerProps) {
+}: DatePickerProps) {
   const [date, setDate] = useState<Date>(value ? moment(value) : null);
 
   const [isFocussed, setIsFocussed] = useState<boolean>(false);
