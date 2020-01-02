@@ -8,13 +8,14 @@ import { NumberInput } from "../components/number_input_field";
 import { SelectField } from "../components/select_field";
 import { IWidgets } from "../interfaces/widgets.interfaces";
 import {
-  FormWrapper,
-  ObjectWrapper,
-  ObjectItemWrapper,
-  ArrayWrapper,
-  ArrayItemWrapper,
+  ArrayItemAddBtn,
   ArrayItemRemoveBtn,
-  ArrayItemAddBtn
+  ArrayItemWrapper,
+  ArrayWrapper,
+  FieldWrapper,
+  FormWrapper,
+  ObjectItemWrapper,
+  ObjectWrapper
 } from "../wrappers/component_wrappers";
 
 export const defaultWidgets: IWidgets = {
@@ -47,6 +48,7 @@ export const defaultWidgets: IWidgets = {
     array: ArrayWrapper,
     "array:item": ArrayItemWrapper,
     "array:itemremove": ArrayItemRemoveBtn,
-    "array:itemadd": ArrayItemAddBtn
+    "array:itemadd": ArrayItemAddBtn,
+    field: FieldWrapper
   }
 };

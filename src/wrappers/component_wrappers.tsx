@@ -37,7 +37,7 @@ export function ObjectItemWrapper({
   children,
   ...wrapperProps
 }: ObjectItemWrapperProps) {
-  return <>children</>;
+  return <>{children}</>;
 }
 
 export function ArrayWrapper({

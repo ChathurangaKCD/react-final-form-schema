@@ -1,12 +1,12 @@
 import React from "react";
 import { Field } from "react-final-form";
+import { useWidget, useWrapper } from "../../form/schema_context";
 import { NumberInputProps } from "../../interfaces/components.interfaces";
 import { Schema } from "../../interfaces/form.interfaces";
-import { useWidget } from "../../form/schema_context";
+import { RenderFnProps } from "../../interfaces/renderers.interfaces";
+import { FieldWrapperProps } from "../../interfaces/wrappers.interfaces";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { getValidators } from "../../utils/validators";
-import { FieldWrapper } from "../../wrappers/component_wrappers";
-import { RenderFnProps } from "../../interfaces/renderers.interfaces";
 
 interface RenderNumberInputFnProps extends RenderFnProps {}
 
@@ -25,6 +25,7 @@ export function RenderNumberInput({
     type: schema.type,
     widget: uiSchema && uiSchema.widget
   });
+  const FieldWrapper = useWrapper<FieldWrapperProps>("field");
   return (
     <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>

@@ -1,13 +1,14 @@
 import React from "react";
 import { Field } from "react-final-form";
+import { useWidget, useWrapper } from "../../form/schema_context";
 import {
   DatePickerProps,
   DateTimePickerProps
 } from "../../interfaces/components.interfaces";
-import { useWidget } from "../../form/schema_context";
+import { RenderFnProps } from "../../interfaces/renderers.interfaces";
+import { FieldWrapperProps } from "../../interfaces/wrappers.interfaces";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
-import { RenderFnProps } from "../../interfaces/renderers.interfaces";
 interface RenderDateInputFnProps extends RenderFnProps {}
 
 export function RenderDateInput({
@@ -22,6 +23,7 @@ export function RenderDateInput({
     type: schema.type,
     widget: uiSchema && uiSchema.widget
   });
+  const FieldWrapper = useWrapper<FieldWrapperProps>("field");
   return (
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>

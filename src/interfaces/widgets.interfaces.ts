@@ -13,6 +13,7 @@ import {
   ArrayItemRemoveBtnProps,
   ArrayItemWrapperProps,
   ArrayWrapperProps,
+  FieldWrapperProps,
   FormWrapperProps,
   ObjectItemWrapperProps,
   ObjectWrapperProps
@@ -27,7 +28,8 @@ export type WrapperTypes =
   | "array"
   | "array:item"
   | "array:itemremove"
-  | "array:itemadd";
+  | "array:itemadd"
+  | "field";
 
 export interface IWidgets {
   number: {
@@ -60,5 +62,6 @@ export interface IWidgets {
     "array:item": Widget<ArrayItemWrapperProps>;
     "array:itemremove": Widget<ArrayItemRemoveBtnProps>;
     "array:itemadd": Widget<ArrayItemAddBtnProps>;
+    field: Widget<FieldWrapperProps>;
   };
 }
