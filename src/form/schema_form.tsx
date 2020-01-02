@@ -1,20 +1,25 @@
 import arrayMutators from "final-form-arrays";
 import React from "react";
 import { Form, FormSpy } from "react-final-form";
-import { SchemaRenderer } from "./renderers/schema_renderer";
+import { SchemaRenderer } from "../renderers/schema_renderer";
 import { SchemaContextProvider } from "./schema_context";
-import { FormWrapper } from "./wrappers/component_wrappers";
+import { FormWrapper } from "../wrappers/component_wrappers";
 import { SchemaFormProps } from "./interfaces";
 
 export function SchemaForm({
   schema,
   uiSchema = null,
   initialValues = {},
+  widgets,
   onSubmit,
   onValueChange
 }: SchemaFormProps) {
   return (
-    <SchemaContextProvider schema={schema} uiSchema={uiSchema}>
+    <SchemaContextProvider
+      schema={schema}
+      uiSchema={uiSchema}
+      widgets={widgets}
+    >
       <Form
         onSubmit={onSubmit}
         initialValues={{ ...initialValues }}

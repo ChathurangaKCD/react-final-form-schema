@@ -4,7 +4,7 @@ import { ArrayRenderer } from "./array_renderer";
 import { ObjectRenderer } from "./object_renderer";
 import { FieldRenderer } from "./field_renderer";
 import { CustomCompRenderer } from "./custom_comp_renderer";
-import { useFormSchema } from "../schema_context";
+import { useFormSchema } from "../form/schema_context";
 
 /**
  * Render whole/sub schema

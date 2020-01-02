@@ -1,8 +1,9 @@
 import React from "react";
 import { Field } from "react-final-form";
+import { SelectFieldProps } from "../../components/interfaces";
+import { useWidget } from "../../form/schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
-import { SelectField } from "../../components/select_field";
 
 interface RenderEnumSelectFnProps extends RenderFnProps {}
 /**
@@ -10,7 +11,7 @@ interface RenderEnumSelectFnProps extends RenderFnProps {}
  * * single value
  * * array
  */
-export function renderEnumSelect({
+export function RenderEnumSelect({
   schema,
   uiSchema,
   dataPath,
@@ -20,11 +21,16 @@ export function renderEnumSelect({
   const itemSchema = isMultiple ? schema.items : schema;
   const optionValues = itemSchema.enum;
   const optionLabels = itemSchema.enumNames;
+
+  const SelectFieldWidget = useWidget<SelectFieldProps>({
+    type: schema.type,
+    widget: (uiSchema && uiSchema.widget) || "enum"
+  });
   return (
     <FieldWrapper isRow={false} level={level}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <SelectField
+          <SelectFieldWidget
             label={schema.title}
             input={input}
             optionValues={optionValues}
@@ -32,7 +38,7 @@ export function renderEnumSelect({
             multiple={isMultiple}
             uiSchema={uiSchema}
             error={meta.touched && meta.error}
-          ></SelectField>
+          />
         )}
       </Field>
     </FieldWrapper>

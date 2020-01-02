@@ -1,4 +1,4 @@
-import { Schema } from "../interfaces";
+import { Schema } from "../form/interfaces";
 
 export const required = (required: boolean) => (value: any) =>
   !required || value !== undefined || value !== null ? undefined : "Required";

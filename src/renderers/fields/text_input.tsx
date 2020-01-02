@@ -1,16 +1,17 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { TextInput } from "../../components/input_field";
-import { Schema } from "../../interfaces";
+import { TextInputProps } from "../../components/interfaces";
+import { Schema } from "../../form/interfaces";
+import { useWidget } from "../../form/schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
-import { FieldWrapper } from "../../wrappers/component_wrappers";
 import { getValidators } from "../../utils/validators";
+import { FieldWrapper } from "../../wrappers/component_wrappers";
 
 interface RenderTextInputFnProps extends RenderFnProps {}
 
 const textValidators = ["minLength", "maxLength"];
 
-export function renderTextInput({
+export function RenderTextInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -19,11 +20,15 @@ export function renderTextInput({
   uiSchema
 }: RenderTextInputFnProps) {
   const validators = getValidators(schema, textValidators);
+  const TextInputWidget = useWidget<TextInputProps>({
+    type: schema.type,
+    widget: uiSchema && uiSchema.widget
+  });
   return (
     <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
-          <TextInput
+          <TextInputWidget
             label={schema.title}
             error={meta.touched && meta.error}
             uiSchema={uiSchema}
