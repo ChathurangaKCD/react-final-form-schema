@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { SchemaForm } from "./schema_form";
 import formSchema from "./schema.json";
 import formUiSchema from "./ui_schema.json";
-
+import { defaultWidgets } from "./registry/widget_list";
 const initialValues = { title: "t1" };
 
 const dataRef = (function() {
@@ -34,6 +34,7 @@ export default function FinalForm() {
         uiSchema={formUiSchema}
         initialValues={initialValues}
         onSubmit={onSubmit}
+        widgets={defaultWidgets}
         onValueChange={dataRef.update}
       ></SchemaForm>
       <div style={{ width: "100vw", margin: "auto", paddingTop: "50px" }}>

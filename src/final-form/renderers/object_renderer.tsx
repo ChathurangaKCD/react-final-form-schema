@@ -1,14 +1,14 @@
 import React from "react";
-import { useFormSchema } from "../schema_context";
+import { useFormSchema, useWrapper } from "../schema_context";
 import {
   getDataSubPath,
   getSchemaSubPath,
   getUiSubPath
 } from "../utils/schema_path_utils";
 import {
-  ObjectItemWrapper,
-  ObjectWrapper
-} from "../wrappers/component_wrappers";
+  ObjectItemWrapperProps,
+  ObjectWrapperProps
+} from "../wrappers/interfaces";
 import { SchemaRenderer } from "./schema_renderer";
 
 /**
@@ -23,6 +23,8 @@ export function ObjectRenderer({
 }: ObjectRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const { title, properties: schemaObj } = schema;
+  const ObjectWrapper = useWrapper<ObjectWrapperProps>("object");
+  const ObjectItemWrapper = useWrapper<ObjectItemWrapperProps>("object:item");
   return (
     <ObjectWrapper title={title} level={level}>
       {Object.keys(schemaObj).map(key => {

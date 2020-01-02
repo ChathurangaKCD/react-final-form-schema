@@ -1,11 +1,12 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { CheckBoxField } from "../../components/checkbox_field.";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
+import { useWidget } from "../../schema_context";
+import { CheckBoxInputProps } from "../../components/interfaces";
 
 interface RenderBooleanInputFnProps extends RenderFnProps {}
-export function renderBooleanInput({
+export function RenderBooleanInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -13,11 +14,15 @@ export function renderBooleanInput({
   schema,
   uiSchema
 }: RenderBooleanInputFnProps) {
+  const CheckBoxWidget = useWidget<CheckBoxInputProps>({
+    type: schema.type,
+    widget: uiSchema && uiSchema.widget
+  });
   return (
     <FieldWrapper isRow={false} level={level}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <CheckBoxField
+          <CheckBoxWidget
             label={schema.title}
             input={input}
             {...schema.fieldProps}

@@ -1,12 +1,15 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { ReactDateRangePicker } from "../../components/datetime/react-dates/date_range_picker";
-import { DateTimePickers } from "../../components/datetime/react-widgets";
+import {
+  DateRangePickerProps,
+  DateTimeRangePickerProps
+} from "../../components/interfaces";
+import { useWidget } from "../../schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
 interface RenderDateInputFnProps extends RenderFnProps {}
 
-export function renderDateRangeInput({
+export function RenderDateRangeInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -14,11 +17,15 @@ export function renderDateRangeInput({
   schema,
   uiSchema
 }: RenderDateInputFnProps) {
+  const DateRangePickerWidget = useWidget<DateRangePickerProps>({
+    type: schema.type,
+    widget: uiSchema && uiSchema.widget
+  });
   return (
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <ReactDateRangePicker
+          <DateRangePickerWidget
             label={schema.title}
             input={input}
             uiSchema={uiSchema}
@@ -30,7 +37,7 @@ export function renderDateRangeInput({
   );
 }
 
-export function renderDateTimeRangeInput({
+export function RenderDateTimeRangeInput({
   dataPath,
   schemaPath,
   uiPath,
@@ -38,11 +45,15 @@ export function renderDateTimeRangeInput({
   schema,
   uiSchema
 }: RenderDateInputFnProps) {
+  const DateTimeRangePickerWidget = useWidget<DateTimeRangePickerProps>({
+    type: schema.type,
+    widget: uiSchema && uiSchema.widget
+  });
   return (
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
-          <DateTimePickers.DateTimeRange
+          <DateTimeRangePickerWidget
             label={schema.title}
             dateOnly={schema.type === "date"}
             input={input}

@@ -10,11 +10,16 @@ export function SchemaForm({
   schema,
   uiSchema = null,
   initialValues = {},
+  widgets,
   onSubmit,
   onValueChange
 }: SchemaFormProps) {
   return (
-    <SchemaContextProvider schema={schema} uiSchema={uiSchema}>
+    <SchemaContextProvider
+      schema={schema}
+      uiSchema={uiSchema}
+      widgets={widgets}
+    >
       <Form
         onSubmit={onSubmit}
         initialValues={{ ...initialValues }}

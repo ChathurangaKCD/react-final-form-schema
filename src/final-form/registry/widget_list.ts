@@ -1,48 +1,27 @@
-import { NumberInput } from "../components/number_input_field";
-import { TextInput } from "../components/input_field";
 import { CheckBoxField } from "../components/checkbox_field.";
-import { SelectField } from "../components/select_field";
 import { ReactDatePicker } from "../components/datetime/react-dates/date_picker";
-import { CustomDateTimeRangePicker } from "../components/datetime/react-widgets/date_time_range_picker";
-import { CustomDateTimePicker } from "../components/datetime/react-widgets/date_time_picker";
 import { ReactDateRangePicker } from "../components/datetime/react-dates/date_range_picker";
+import { CustomDateTimePicker } from "../components/datetime/react-widgets/date_time_picker";
+import { CustomDateTimeRangePicker } from "../components/datetime/react-widgets/date_time_range_picker";
+import { TextInput } from "../components/input_field";
+import { NumberInput } from "../components/number_input_field";
+import { SelectField } from "../components/select_field";
+import { IWidgets } from "./widgets.interfaces";
 import {
-  NumberInputProps,
-  TextInputProps,
-  CheckBoxInputProps,
-  DateTimePickerProps,
-  DateRangePickerProps,
-  DateTimeRangePickerProps,
-  DatePickerProps,
-  SelectFieldProps
-} from "../components/interfaces";
+  FormWrapper,
+  ObjectWrapper,
+  ObjectItemWrapper,
+  ArrayWrapper,
+  ArrayItemWrapper,
+  ArrayItemRemoveBtn,
+  ArrayItemAddBtn
+} from "../wrappers/component_wrappers";
 
-type Widget<T> = React.FC<T> | React.Component<T, any, any>;
-
-interface Widgets {
+export const defaultWidgets: IWidgets = {
   number: {
-    default: Widget<NumberInputProps>;
-  };
-  string: {
-    default: Widget<TextInputProps>;
-    enum: Widget<SelectFieldProps>;
-  };
-  boolean: {
-    default: Widget<CheckBoxInputProps>;
-  };
-  datetime: {
-    date: Widget<DatePickerProps>;
-    datetime: Widget<DateTimePickerProps>;
-    daterange: Widget<DateRangePickerProps>;
-    datetimerange: Widget<DateTimeRangePickerProps>;
-  };
-  object: {};
-  array: {};
-  custom: {};
-}
-
-const defaultWidgets: Widgets = {
-  number: {
+    default: NumberInput
+  },
+  integer: {
     default: NumberInput
   },
   string: {
@@ -52,24 +31,22 @@ const defaultWidgets: Widgets = {
   boolean: {
     default: CheckBoxField
   },
-  datetime: {
-    date: ReactDatePicker,
-    datetime: CustomDateTimePicker,
-    daterange: ReactDateRangePicker,
-    datetimerange: CustomDateTimeRangePicker
-  },
-  object: {
-    wrapper: undefined,
-    itemWrapper: undefined
-  },
+  date: { default: ReactDatePicker },
+  datetime: { default: CustomDateTimePicker },
+  daterange: { default: ReactDateRangePicker },
+  datetimerange: { default: CustomDateTimeRangePicker },
+  object: {},
   array: {
-    wrapper: undefined,
-    itemWrapper: undefined,
-    removeBtn: undefined
+    enum: SelectField
   },
-  custom: {}
+  custom: {},
+  wrapper: {
+    form: FormWrapper,
+    object: ObjectWrapper,
+    "object:item": ObjectItemWrapper,
+    array: ArrayWrapper,
+    "array:item": ArrayItemWrapper,
+    "array:itemremove": ArrayItemRemoveBtn,
+    "array:itemadd": ArrayItemAddBtn
+  }
 };
-
-export function getWidgets(customWidgets = {}) {
-  return { ...defaultWidgets, ...customWidgets };
-}

@@ -7,6 +7,7 @@ import {
   SchemaContextValue,
   UiSchema
 } from "./interfaces";
+import { Widget, WrapperTypes } from "./registry/widgets.interfaces";
 
 const ajv = new Ajv();
 
@@ -17,6 +18,7 @@ const FormSchemaContext = React.createContext<SchemaContextValue>(
 export function SchemaContextProvider({
   schema,
   uiSchema = null,
+  widgets,
   defs = null,
   children
 }: SchemaContextProps) {
@@ -32,8 +34,8 @@ export function SchemaContextProvider({
   const contextVal = useMemo(() => {
     countRef.current !== 0 && console.warn("Schema Context Changed");
     countRef.current++;
-    return { schema, uiSchema };
-  }, [schema, uiSchema]);
+    return { schema, uiSchema, widgets };
+  }, [schema, uiSchema, widgets]);
   if (!valid) return <h5>"Schema Error"</h5>;
   return (
     <FormSchemaContext.Provider value={contextVal}>
@@ -50,4 +52,20 @@ export function useFormSchema(path = "", uiPath = "") {
     const schemas = { schema: subSchema, uiSchema: uiSubSchema };
     return schemas;
   }, [path, uiPath, schema, uiSchema]);
+}
+
+interface IUseWidget {
+  type: string;
+  widget?: string;
+}
+
+export function useWidget<T>({ type, widget }: IUseWidget): Widget<T> {
+  const { widgets } = useContext(FormSchemaContext);
+  const Comp = _get(widgets, `${type}.${widget || "default"}`);
+  if (!Comp) console.log("Undefined", type, widget);
+  return Comp as Widget<T>;
+}
+
+export function useWrapper<T>(wrapperType: WrapperTypes): React.FC<T> {
+  return useWidget({ type: "wrapper", widget: wrapperType });
 }
