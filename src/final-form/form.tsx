@@ -6,18 +6,20 @@ import { defaultWidgets } from "./registry/widget_list";
 const initialValues = { title: "t1" };
 
 const dataRef = (function() {
-  let onUpdate = null;
+  let onUpdate: any = null;
   return {
-    update(val) {
+    update(val: any) {
       onUpdate && onUpdate(val);
     },
-    subscribe(cb) {
+    subscribe(cb: any) {
       onUpdate = cb;
-      return () => (onUpdate = null);
+      return (): void => {
+        onUpdate = null;
+      };
     }
   };
 })();
-function DataSubscriber({ children }) {
+function DataSubscriber({ children }: any) {
   const [val, setVal] = useState(null);
   useEffect(() => {
     return dataRef.subscribe(setVal);
@@ -39,7 +41,7 @@ export default function FinalForm() {
       ></SchemaForm>
       <div style={{ width: "100vw", margin: "auto", paddingTop: "50px" }}>
         <DataSubscriber>
-          {values => <pre>{JSON.stringify(values, 0, 2)}</pre>}
+          {(values: any) => <pre>{JSON.stringify(values, null, 2)}</pre>}
         </DataSubscriber>
         <pre style={{ width: "100vw", margin: "auto", paddingTop: "50px" }}>
           {JSON.stringify(formSchema, null, 2)}
