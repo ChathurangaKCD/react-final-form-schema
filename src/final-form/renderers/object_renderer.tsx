@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormSchema, useWrapper } from "../schema_context";
+import { useFormSchema, useWrapper } from "../form/schema_context";
 import {
   getDataSubPath,
   getSchemaSubPath,

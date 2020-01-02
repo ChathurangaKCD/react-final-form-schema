@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import MyForm from "./final-form/form";
+import MyForm from "./final-form/form-example/form";
 
 function App() {
   return (

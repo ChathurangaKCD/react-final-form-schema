@@ -1,6 +1,6 @@
 import React from "react";
 import { UnsupportedField } from "../components/unsupported_field";
-import { useFormSchema } from "../schema_context";
+import { useFormSchema } from "../form/schema_context";
 import { RenderBooleanInput } from "./fields/boolean_input";
 import { RenderDateInput, RenderDateTimeInput } from "./fields/date_input";
 import {

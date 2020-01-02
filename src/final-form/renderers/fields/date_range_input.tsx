@@ -4,7 +4,7 @@ import {
   DateRangePickerProps,
   DateTimeRangePickerProps
 } from "../../components/interfaces";
-import { useWidget } from "../../schema_context";
+import { useWidget } from "../../form/schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
 interface RenderDateInputFnProps extends RenderFnProps {}

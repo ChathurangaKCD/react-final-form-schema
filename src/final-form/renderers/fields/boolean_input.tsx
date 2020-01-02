@@ -2,7 +2,7 @@ import React from "react";
 import { Field } from "react-final-form";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
-import { useWidget } from "../../schema_context";
+import { useWidget } from "../../form/schema_context";
 import { CheckBoxInputProps } from "../../components/interfaces";
 
 interface RenderBooleanInputFnProps extends RenderFnProps {}
