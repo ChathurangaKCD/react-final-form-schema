@@ -3,7 +3,8 @@ import { Field } from "react-final-form";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
 import { useWidget } from "../../form/schema_context";
-import { CheckBoxInputProps } from "../../components/interfaces";
+import { CheckBoxInputProps } from "../../interfaces/components.interfaces";
+import { RenderFnProps } from "../../interfaces/renderers.interfaces";
 
 interface RenderBooleanInputFnProps extends RenderFnProps {}
 export function RenderBooleanInput({

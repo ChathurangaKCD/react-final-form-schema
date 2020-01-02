@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-import { NumberInputProps } from "./interfaces";
+import { NumberInputProps } from "../interfaces/components.interfaces";
 
 export function NumberInput({
   label,

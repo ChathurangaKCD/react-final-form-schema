@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { CheckBoxInputProps } from "./interfaces";
+import { CheckBoxInputProps } from "../interfaces/components.interfaces";
 
 export function CheckBoxField({
   label,

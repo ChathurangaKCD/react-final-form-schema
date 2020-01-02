@@ -8,8 +8,9 @@ import {
 import {
   ObjectItemWrapperProps,
   ObjectWrapperProps
-} from "../wrappers/interfaces";
+} from "../interfaces/wrappers.interfaces";
 import { SchemaRenderer } from "./schema_renderer";
+import { ObjectRendererProps } from "../interfaces/renderers.interfaces";
 
 /**
  * Render Object Type

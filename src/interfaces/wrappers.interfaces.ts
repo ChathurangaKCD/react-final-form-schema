@@ -1,5 +1,5 @@
 export interface WrapperProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export interface FormWrapperProps {

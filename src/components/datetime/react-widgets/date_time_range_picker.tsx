@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CustomDateTimePicker } from "./date_time_picker";
-import { DateTimeRangePickerProps } from "../../interfaces";
+import { DateTimeRangePickerProps } from "../../../interfaces/components.interfaces";
 
 export function CustomDateTimeRangePicker({
   label,

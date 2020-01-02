@@ -1,11 +1,12 @@
 import React from "react";
 import { Field } from "react-final-form";
-import { NumberInputProps } from "../../components/interfaces";
-import { Schema } from "../../form/interfaces";
+import { NumberInputProps } from "../../interfaces/components.interfaces";
+import { Schema } from "../../interfaces/form.interfaces";
 import { useWidget } from "../../form/schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { getValidators } from "../../utils/validators";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
+import { RenderFnProps } from "../../interfaces/renderers.interfaces";
 
 interface RenderNumberInputFnProps extends RenderFnProps {}
 

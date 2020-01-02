@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { Form } from "react-bootstrap";
 import Select from "react-select";
-import { SelectFieldProps } from "./interfaces";
+import { SelectFieldProps } from "../interfaces/components.interfaces";
 
 // export function SimpleSelectField({
 //   label,

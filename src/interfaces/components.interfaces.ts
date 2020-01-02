@@ -1,5 +1,5 @@
 import { FieldInputProps } from "react-final-form";
-import { UiSchema } from "../interfaces";
+import { UiSchema } from "./form.interfaces";
 
 export interface FieldProps {
   label: string;

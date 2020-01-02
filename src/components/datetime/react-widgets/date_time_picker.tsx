@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { Form } from "react-bootstrap";
 import { DatePicker, DateTimePicker } from "react-widgets";
 import dateFnsLocalizer from "react-widgets-date-fns";
-import { DateTimePickerProps } from "../../interfaces";
+import { DateTimePickerProps } from "../../../interfaces/components.interfaces";
 import "./date_time_picker.scss";
 dateFnsLocalizer();
 

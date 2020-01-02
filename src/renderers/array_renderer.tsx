@@ -2,17 +2,20 @@ import React from "react";
 import { useForm } from "react-final-form";
 import { FieldArray } from "react-final-form-arrays";
 import { UnsupportedField } from "../components/unsupported_field";
-import { Schema } from "../form/interfaces";
 import { useFormSchema, useWrapper } from "../form/schema_context";
+import {
+  ArrayRendererProps,
+  RenderFnProps
+} from "../interfaces/renderers.interfaces";
+import {
+  ArrayItemAddBtnProps,
+  ArrayItemRemoveBtnProps,
+  ArrayItemWrapperProps,
+  ArrayWrapperProps
+} from "../interfaces/wrappers.interfaces";
 import { getSchemaSubPath, getUiSubPath } from "../utils/schema_path_utils";
 import { RenderEnumSelect } from "./fields/enum_select";
 import { SchemaRenderer } from "./schema_renderer";
-import {
-  ArrayWrapperProps,
-  ArrayItemWrapperProps,
-  ArrayItemAddBtnProps,
-  ArrayItemRemoveBtnProps
-} from "../wrappers/interfaces";
 
 /**
  * Render Array Type
@@ -104,9 +107,7 @@ function RenderNestedArray({
   );
 }
 
-interface RenderFixedItemListProps extends RenderFnProps {
-  schema: Schema;
-}
+interface RenderFixedItemListProps extends RenderFnProps {}
 
 function renderFixedItemList({ schema, dataPath }: RenderFixedItemListProps) {
   const props = { schema, path: dataPath };

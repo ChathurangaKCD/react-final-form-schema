@@ -4,7 +4,7 @@ import { Form, FormSpy } from "react-final-form";
 import { SchemaRenderer } from "../renderers/schema_renderer";
 import { SchemaContextProvider } from "./schema_context";
 import { FormWrapper } from "../wrappers/component_wrappers";
-import { SchemaFormProps } from "./interfaces";
+import { SchemaFormProps } from "../interfaces/form.interfaces";
 
 export function SchemaForm({
   schema,

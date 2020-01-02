@@ -10,6 +10,7 @@ import {
 import { RenderEnumSelect } from "./fields/enum_select";
 import { RenderNumberInput } from "./fields/number_input";
 import { RenderTextInput } from "./fields/text_input";
+import { FieldRendererProps } from "../interfaces/renderers.interfaces";
 
 /**
  * Render Fields

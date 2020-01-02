@@ -5,6 +5,7 @@ import { ObjectRenderer } from "./object_renderer";
 import { FieldRenderer } from "./field_renderer";
 import { CustomCompRenderer } from "./custom_comp_renderer";
 import { useFormSchema } from "../form/schema_context";
+import { SchemaRendererProps } from "../interfaces/renderers.interfaces";
 
 /**
  * Render whole/sub schema

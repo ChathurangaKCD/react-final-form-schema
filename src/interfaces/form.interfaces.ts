@@ -1,12 +1,12 @@
 import { Form } from "react-final-form";
-import { IWidgets } from "./registry/widgets.interfaces";
+import { IWidgets } from "./widgets.interfaces";
 
 type KeyValueObj = { [x: string]: any };
 
 export type Schema = KeyValueObj;
 export type UiSchema = KeyValueObj | null | undefined;
 
-interface SchemaFormProps {
+export interface SchemaFormProps {
   schema: Schema;
   uiSchema: UiSchema;
   initialValues: KeyValueObj;
@@ -15,15 +15,15 @@ interface SchemaFormProps {
   onValueChange?: (val: any) => void;
 }
 
-interface SchemaContextProps {
+export interface SchemaContextProps {
   schema: Schema;
   uiSchema: UiSchema;
   widgets: IWidgets;
   defs?: any;
-  children: React.ReactChild<typeof Form>;
+  children: React.ReactNode;
 }
 
-interface SchemaContextValue {
+export interface SchemaContextValue {
   schema: Schema;
   uiSchema: UiSchema;
   widgets: IWidgets;

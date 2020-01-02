@@ -6,7 +6,7 @@ import { CustomDateTimeRangePicker } from "../components/datetime/react-widgets/
 import { TextInput } from "../components/input_field";
 import { NumberInput } from "../components/number_input_field";
 import { SelectField } from "../components/select_field";
-import { IWidgets } from "./widgets.interfaces";
+import { IWidgets } from "../interfaces/widgets.interfaces";
 import {
   FormWrapper,
   ObjectWrapper,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { TextInputProps } from "./interfaces";
+import { TextInputProps } from "../interfaces/components.interfaces";
 
 const allowedInputWidgets = ["textarea"];
 

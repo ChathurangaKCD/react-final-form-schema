@@ -6,8 +6,8 @@ import {
   SchemaContextProps,
   SchemaContextValue,
   UiSchema
-} from "./interfaces";
-import { Widget, WrapperTypes } from "../registry/widgets.interfaces";
+} from "../interfaces/form.interfaces";
+import { Widget, WrapperTypes } from "../interfaces/widgets.interfaces";
 
 const ajv = new Ajv();
 

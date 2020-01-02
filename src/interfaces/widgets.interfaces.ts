@@ -7,7 +7,7 @@ import {
   NumberInputProps,
   SelectFieldProps,
   TextInputProps
-} from "../components/interfaces";
+} from "./components.interfaces";
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -16,7 +16,7 @@ import {
   FormWrapperProps,
   ObjectItemWrapperProps,
   ObjectWrapperProps
-} from "../wrappers/interfaces";
+} from "./wrappers.interfaces";
 
 export type Widget<T> = React.FC<T>;
 

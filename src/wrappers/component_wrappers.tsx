@@ -9,7 +9,7 @@ import {
   FormWrapperProps,
   ObjectItemWrapperProps,
   ObjectWrapperProps
-} from "./interfaces";
+} from "../interfaces/wrappers.interfaces";
 
 export function FormWrapper({ children, ...otherProps }: FormWrapperProps) {
   return <Form {...otherProps}>{children}</Form>;
@@ -37,7 +37,7 @@ export function ObjectItemWrapper({
   children,
   ...wrapperProps
 }: ObjectItemWrapperProps) {
-  return children;
+  return <>children</>;
 }
 
 export function ArrayWrapper({

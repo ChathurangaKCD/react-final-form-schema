@@ -3,10 +3,11 @@ import { Field } from "react-final-form";
 import {
   DateRangePickerProps,
   DateTimeRangePickerProps
-} from "../../components/interfaces";
+} from "../../interfaces/components.interfaces";
 import { useWidget } from "../../form/schema_context";
 import { getFieldName } from "../../utils/schema_path_utils";
 import { FieldWrapper } from "../../wrappers/component_wrappers";
+import { RenderFnProps } from "../../interfaces/renderers.interfaces";
 interface RenderDateInputFnProps extends RenderFnProps {}
 
 export function RenderDateRangeInput({
