@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { SchemaForm } from "./schema_form";
+import { SchemaForm } from "../form/schema_form";
 import formSchema from "./schema.json";
 import formUiSchema from "./ui_schema.json";
-import { defaultWidgets } from "./registry/widget_list";
+import { defaultWidgets } from "../registry/widget_list";
 const initialValues = { title: "t1" };
 
 const dataRef = (function() {
