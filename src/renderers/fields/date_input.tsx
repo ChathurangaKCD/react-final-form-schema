@@ -1,14 +1,13 @@
-import React from "react";
-import { Field } from "react-final-form";
-import { useWidget, useWrapper } from "../../form/schema_context";
+import React from 'react';
+import { Field } from 'react-final-form';
+import { useWidget, useWrapper } from '../../form/schema_context';
 import {
   DatePickerProps,
-  DateTimePickerProps
-} from "../../interfaces/components.interfaces";
-import { RenderFnProps } from "../../interfaces/renderers.interfaces";
-import { FieldWrapperProps } from "../../interfaces/wrappers.interfaces";
-import { getFieldName } from "../../utils/schema_path_utils";
-import { FieldWrapper } from "../../wrappers/component_wrappers";
+  DateTimePickerProps,
+} from '../../interfaces/components.interfaces';
+import { RenderFnProps } from '../../interfaces/renderers.interfaces';
+import { FieldWrapperProps } from '../../interfaces/wrappers.interfaces';
+import { getFieldName } from '../../utils/schema_path_utils';
 interface RenderDateInputFnProps extends RenderFnProps {}
 
 export function RenderDateInput({
@@ -17,13 +16,13 @@ export function RenderDateInput({
   uiPath,
   level,
   schema,
-  uiSchema
+  uiSchema,
 }: RenderDateInputFnProps) {
   const DatePickerWidget = useWidget<DatePickerProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget
+    widget: uiSchema && uiSchema.widget,
   });
-  const FieldWrapper = useWrapper<FieldWrapperProps>("field");
+  const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
@@ -45,19 +44,20 @@ export function RenderDateTimeInput({
   uiPath,
   level,
   schema,
-  uiSchema
+  uiSchema,
 }: RenderDateInputFnProps) {
   const DateTimePickerWidget = useWidget<DateTimePickerProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget
+    widget: uiSchema && uiSchema.widget,
   });
+  const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper level={level} isRow={true}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
           <DateTimePickerWidget
             label={schema.title}
-            dateOnly={schema.type === "date"}
+            dateOnly={schema.type === 'date'}
             input={input}
             uiSchema={uiSchema}
             required={false}

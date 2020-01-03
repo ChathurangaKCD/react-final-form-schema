@@ -1,21 +1,21 @@
-import React from "react";
-import { useForm } from "react-final-form";
-import { FieldArray } from "react-final-form-arrays";
-import { UnsupportedField } from "../components/unsupported_field";
-import { useFormSchema, useWrapper } from "../form/schema_context";
+import React from 'react';
+import { useForm } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
+import { useFormSchema, useWrapper } from '../form/schema_context';
 import {
   ArrayRendererProps,
-  RenderFnProps
-} from "../interfaces/renderers.interfaces";
+  RenderFnProps,
+} from '../interfaces/renderers.interfaces';
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
   ArrayItemWrapperProps,
-  ArrayWrapperProps
-} from "../interfaces/wrappers.interfaces";
-import { getSchemaSubPath, getUiSubPath } from "../utils/schema_path_utils";
-import { RenderEnumSelect } from "./fields/enum_select";
-import { SchemaRenderer } from "./schema_renderer";
+  ArrayWrapperProps,
+} from '../interfaces/wrappers.interfaces';
+import { getSchemaSubPath, getUiSubPath } from '../utils/schema_path_utils';
+import { RenderEnumSelect } from './fields/enum_select';
+import { RenderUnsupportedField } from './fields/unsupported_field';
+import { SchemaRenderer } from './schema_renderer';
 
 /**
  * Render Array Type
@@ -29,7 +29,7 @@ export function ArrayRenderer({
   dataPath,
   schemaPath,
   uiPath,
-  level
+  level,
 }: ArrayRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const renderData = {
@@ -38,7 +38,7 @@ export function ArrayRenderer({
     dataPath,
     uiPath,
     schemaPath,
-    level
+    level,
   };
   if (Array.isArray(schema.items)) {
     return renderFixedItemList({
@@ -47,7 +47,7 @@ export function ArrayRenderer({
       dataPath,
       schemaPath,
       uiPath,
-      level
+      level,
     });
   } else if (schema.items.enum) {
     return <RenderEnumSelect {...renderData} />;
@@ -62,16 +62,16 @@ function RenderNestedArray({
   level,
   dataPath,
   schemaPath,
-  uiPath
+  uiPath,
 }: RenderNestedArrayProps) {
   const { title } = schema;
   const formApi = useForm();
-  const ArrayWrapper = useWrapper<ArrayWrapperProps>("array");
-  const ArrayItemWrapper = useWrapper<ArrayItemWrapperProps>("array:item");
+  const ArrayWrapper = useWrapper<ArrayWrapperProps>('array');
+  const ArrayItemWrapper = useWrapper<ArrayItemWrapperProps>('array:item');
   const ArrayItemRemoveBtn = useWrapper<ArrayItemRemoveBtnProps>(
-    "array:itemremove"
+    'array:itemremove'
   );
-  const ArrayItemAddBtn = useWrapper<ArrayItemAddBtnProps>("array:itemadd");
+  const ArrayItemAddBtn = useWrapper<ArrayItemAddBtnProps>('array:itemadd');
   return (
     <ArrayWrapper title={title} level={level}>
       {/* subscribe only to array length; 
@@ -88,8 +88,8 @@ function RenderNestedArray({
             >
               <SchemaRenderer
                 dataPath={name}
-                schemaPath={getSchemaSubPath(schemaPath, "items")}
-                uiPath={getUiSubPath(uiPath, "items")}
+                schemaPath={getSchemaSubPath(schemaPath, 'items')}
+                uiPath={getUiSubPath(uiPath, 'items')}
                 level={level + 1}
               />
             </ArrayItemWrapper>
@@ -109,7 +109,6 @@ function RenderNestedArray({
 
 interface RenderFixedItemListProps extends RenderFnProps {}
 
-function renderFixedItemList({ schema, dataPath }: RenderFixedItemListProps) {
-  const props = { schema, path: dataPath };
-  return <UnsupportedField {...props}></UnsupportedField>;
+function renderFixedItemList(props: RenderFixedItemListProps) {
+  return <RenderUnsupportedField {...props}></RenderUnsupportedField>;
 }

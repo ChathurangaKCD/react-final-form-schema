@@ -1,21 +1,21 @@
-import React from "react";
-import { UnsupportedField } from "../components/unsupported_field";
-import { ArrayRenderer } from "./array_renderer";
-import { ObjectRenderer } from "./object_renderer";
-import { FieldRenderer } from "./field_renderer";
-import { CustomCompRenderer } from "./custom_comp_renderer";
-import { useFormSchema } from "../form/schema_context";
-import { SchemaRendererProps } from "../interfaces/renderers.interfaces";
+import React from 'react';
+import { ArrayRenderer } from './array_renderer';
+import { ObjectRenderer } from './object_renderer';
+import { FieldRenderer } from './field_renderer';
+import { CustomCompRenderer } from './custom_comp_renderer';
+import { useFormSchema } from '../form/schema_context';
+import { SchemaRendererProps } from '../interfaces/renderers.interfaces';
+import { RenderUnsupportedField } from './fields/unsupported_field';
 
 /**
  * Render whole/sub schema
  * @param {*} param0
  */
 export function SchemaRenderer({
-  dataPath = "",
-  schemaPath = "",
-  uiPath = "",
-  level = 0
+  dataPath = '',
+  schemaPath = '',
+  uiPath = '',
+  level = 0,
 }: SchemaRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const props = { dataPath, schemaPath, uiPath, level };
@@ -23,15 +23,20 @@ export function SchemaRenderer({
     return <CustomCompRenderer {...props} />;
   } else if (schema.type) {
     switch (schema.type) {
-      case "object":
+      case 'object':
         return <ObjectRenderer key={dataPath} {...props} />;
-      case "array":
+      case 'array':
         return <ArrayRenderer key={dataPath} {...props} />;
       default:
         return <FieldRenderer key={dataPath} {...props} />;
     }
   }
   return (
-    <UnsupportedField schema={schema} uiSchema={uiSchema} path={schemaPath} />
+    <RenderUnsupportedField
+      key={dataPath}
+      {...props}
+      schema={schema}
+      uiSchema={uiSchema}
+    />
   );
 }

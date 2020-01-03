@@ -1,41 +1,41 @@
-import { FieldInputProps } from "react-final-form";
-import { UiSchema } from "./form.interfaces";
+import { FieldInputProps } from 'react-final-form';
+import { UiSchema } from './form.interfaces';
 
-export interface FieldProps {
+export interface InputFieldProps {
   label: string;
   error: string | false;
   uiSchema: UiSchema;
   input: FieldInputProps<any, HTMLElement>;
 }
 
-export interface TextInputProps extends FieldProps {
+export interface TextInputProps extends InputFieldProps {
   schemaProps: {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
   };
 }
-export interface NumberInputProps extends FieldProps {
+export interface NumberInputProps extends InputFieldProps {
   schemaProps: {
     step?: number;
     min?: number;
     max?: number;
   };
 }
-export interface CheckBoxInputProps extends FieldProps {}
-export interface SelectFieldProps extends FieldProps {
+export interface CheckBoxInputProps extends InputFieldProps {}
+export interface SelectFieldProps extends InputFieldProps {
   optionValues: string[];
   optionLabels: string[];
   multiple: boolean;
 }
-export interface DateTimePickerProps extends FieldProps {
+export interface DateTimePickerProps extends InputFieldProps {
   min?: number | null;
   max?: number | null;
   dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
 }
-export interface DateTimeRangePickerProps extends FieldProps {
+export interface DateTimeRangePickerProps extends InputFieldProps {
   min?: number | null;
   max?: number | null;
   dateOnly: boolean;
@@ -43,11 +43,11 @@ export interface DateTimeRangePickerProps extends FieldProps {
   required: boolean;
 }
 
-export interface DateRangePickerProps extends FieldProps {
+export interface DateRangePickerProps extends InputFieldProps {
   min?: number | null;
   max?: number | null;
 }
-export interface DatePickerProps extends FieldProps {
+export interface DatePickerProps extends InputFieldProps {
   min?: number | null;
   max?: number | null;
 }

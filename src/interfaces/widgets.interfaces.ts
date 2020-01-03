@@ -6,8 +6,9 @@ import {
   DateTimeRangePickerProps,
   NumberInputProps,
   SelectFieldProps,
-  TextInputProps
-} from "./components.interfaces";
+  TextInputProps,
+  InputFieldProps,
+} from './components.interfaces';
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -16,20 +17,20 @@ import {
   FieldWrapperProps,
   FormWrapperProps,
   ObjectItemWrapperProps,
-  ObjectWrapperProps
-} from "./wrappers.interfaces";
+  ObjectWrapperProps,
+} from './wrappers.interfaces';
 
 export type Widget<T> = React.FC<T>;
 
 export type WrapperTypes =
-  | "form"
-  | "object"
-  | "object:item"
-  | "array"
-  | "array:item"
-  | "array:itemremove"
-  | "array:itemadd"
-  | "field";
+  | 'form'
+  | 'object'
+  | 'object:item'
+  | 'array'
+  | 'array:item'
+  | 'array:itemremove'
+  | 'array:itemadd'
+  | 'field';
 
 export interface IWidgets {
   number: {
@@ -54,14 +55,15 @@ export interface IWidgets {
   object: {};
   array: { enum: Widget<SelectFieldProps> };
   custom: {};
+  unsupported: { default: Widget<InputFieldProps> };
   wrapper: {
     form: Widget<FormWrapperProps>;
     object: Widget<ObjectWrapperProps>;
-    "object:item": Widget<ObjectItemWrapperProps>;
+    'object:item': Widget<ObjectItemWrapperProps>;
     array: Widget<ArrayWrapperProps>;
-    "array:item": Widget<ArrayItemWrapperProps>;
-    "array:itemremove": Widget<ArrayItemRemoveBtnProps>;
-    "array:itemadd": Widget<ArrayItemAddBtnProps>;
-    field: Widget<FieldWrapperProps>;
+    'array:item': Widget<ArrayItemWrapperProps>;
+    'array:itemremove': Widget<ArrayItemRemoveBtnProps>;
+    'array:itemadd': Widget<ArrayItemAddBtnProps>;
+    field: Widget<any>;
   };
 }

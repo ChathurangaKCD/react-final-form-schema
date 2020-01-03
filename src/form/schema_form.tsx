@@ -1,10 +1,9 @@
-import arrayMutators from "final-form-arrays";
-import React from "react";
-import { Form, FormSpy } from "react-final-form";
-import { SchemaRenderer } from "../renderers/schema_renderer";
-import { SchemaContextProvider } from "./schema_context";
-import { FormWrapper } from "../wrappers/component_wrappers";
-import { SchemaFormProps } from "../interfaces/form.interfaces";
+import arrayMutators from 'final-form-arrays';
+import React from 'react';
+import { Form, FormSpy } from 'react-final-form';
+import { SchemaRenderer } from '../renderers/schema_renderer';
+import { SchemaContextProvider } from './schema_context';
+import { SchemaFormProps } from '../interfaces/form.interfaces';
 
 export function SchemaForm({
   schema,
@@ -12,8 +11,9 @@ export function SchemaForm({
   initialValues = {},
   widgets,
   onSubmit,
-  onValueChange
+  onValueChange,
 }: SchemaFormProps) {
+  const FormWrapper = widgets.wrapper.form;
   return (
     <SchemaContextProvider
       schema={schema}
@@ -25,7 +25,7 @@ export function SchemaForm({
         initialValues={{ ...initialValues }}
         subscription={{ submitting: true, pristine: true }}
         mutators={{
-          ...arrayMutators
+          ...arrayMutators,
         }}
         render={({ handleSubmit, form, submitting, pristine }) => {
           return (
