@@ -4,10 +4,10 @@ import { ReactDateRangePicker } from '../components/datetime/react-dates/date_ra
 import { CustomDateTimePicker } from '../components/datetime/react-widgets/date_time_picker';
 import { CustomDateTimeRangePicker } from '../components/datetime/react-widgets/date_time_range_picker';
 import { TextInput } from '../components/input_field';
-import { NumberInput } from '../components/number_input_field';
+import { NumberInput, NumberRangeInput } from '../components/number_input_field';
 import { SelectField } from '../components/select_field';
 import { UnsupportedField } from '../components/unsupported_field';
-import { IWidgets } from '../../dist/interfaces/widgets.interfaces';
+import { IWidgets } from '../../dist/';
 import {
   ArrayItemAddBtn,
   ArrayItemRemoveBtn,
@@ -23,9 +23,11 @@ import { SubmitBtn, ResetBtn } from '../wrappers/buttons';
 export const defaultWidgets: IWidgets = {
   number: {
     default: NumberInput,
+    range: NumberRangeInput,
   },
   integer: {
     default: NumberInput,
+    range: NumberRangeInput,
   },
   string: {
     default: TextInput,

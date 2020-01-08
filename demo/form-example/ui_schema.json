@@ -13,6 +13,9 @@
       "ui:widget": "datetimerange",
       "title": "Date range"
     },
-    "priority": {}
+    "priority": {},
+    "priorityRange": {
+      "widget": "range"
+    }
   }
 }

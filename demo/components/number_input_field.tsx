@@ -1,16 +1,10 @@
 import React, { useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 import { useState } from 'react';
-import { NumberInputProps } from '../../dist/interfaces/components.interfaces';
+import { IComponent } from '../../dist/';
 
-export function NumberInput({
-  label,
-  error,
-  uiSchema,
-  input: { value: inComingValue, onChange: notifyChange, ...input },
-  schemaProps,
-}: NumberInputProps) {
-  const [value, setValue] = useState(inComingValue);
+function useControlledNumberInput(inComingValue: number, notifyChange: (nextVal: number) => void) {
+  const [value, setValue] = useState<string | number>(inComingValue);
   const onChange = useCallback(
     e => {
       const nextVal = e.target.value;
@@ -23,6 +17,18 @@ export function NumberInput({
     },
     [inComingValue, notifyChange]
   );
+  const strVal = value.toString();
+  return { value: strVal, onChange }
+}
+
+export function NumberInput({
+  label,
+  error,
+  uiSchema,
+  input: { value: inComingValue, onChange: notifyChange, ...input },
+  schemaProps,
+}: IComponent.NumberInputProps) {
+  const { value, onChange } = useControlledNumberInput(inComingValue, notifyChange);
   return (
     <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
@@ -34,6 +40,34 @@ export function NumberInput({
         value={value}
         onChange={onChange}
       />
+      {error && (
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+      )}
+    </Form.Group>
+  );
+}
+
+
+export function NumberRangeInput({
+  label,
+  error,
+  uiSchema,
+  input: { value: inComingValue, onChange: notifyChange, ...input },
+  schemaProps,
+}: IComponent.NumberInputProps) {
+  const { value, onChange } = useControlledNumberInput(inComingValue, notifyChange);
+  return (
+    <Form.Group controlId={input.name}>
+      {label && <Form.Label className="float-left">{label}</Form.Label>}
+      <Form.Control
+        type="range"
+        {...input}
+        {...schemaProps}
+        isInvalid={!!error}
+        value={value}
+        onChange={onChange}
+      />
+      {inComingValue}
       {error && (
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       )}
