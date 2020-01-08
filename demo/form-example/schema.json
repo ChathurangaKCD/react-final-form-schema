@@ -1,0 +1,102 @@
+{
+  "title": "A list of tasks",
+  "type": "object",
+  "required": ["title"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Task list title",
+      "minLength": 4,
+      "maxLength": 10
+    },
+    "desc": {
+      "type": "string",
+      "title": "Description",
+      "minLength": 30
+    },
+    "additional": {
+      "title": "Additional",
+      "type": "object",
+      "properties": {
+        "subtasks": {
+          "type": "array",
+          "title": "Sub Tasks",
+          "items": { "type": "string" }
+        },
+        "unsupportedfield": {
+          "type": "a"
+        },
+        "date": {
+          "type": "date",
+          "title": "Date"
+        },
+        "datetime": {
+          "type": "datetime",
+          "title": "DateTime"
+        },
+        "daterange": {
+          "type": "daterange",
+          "title": "Date range"
+        },
+        "datetimerange": {
+          "type": "datetimerange",
+          "title": "Datetime range"
+        },
+        "priority": {
+          "type": "number",
+          "title": "Priority",
+          "multipleOf": 0.01,
+          "maximum": 10,
+          "minimum": 3
+        },
+        "priorityInt": {
+          "type": "integer",
+          "title": "PriorityInt",
+          "multipleOf": 10,
+          "maximum": 10,
+          "minimum": 3
+        }
+      }
+    },
+    "category": {
+      "title": "Category",
+      "type": "string",
+      "enum": ["a0", "b0", "b10", "b100", "c1", "c2"],
+      "enumNames": ["A0", "B0", "B10", "B100", "B1", "C2"]
+    },
+    "rel_categories": {
+      "title": "Other Categories",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["a0", "b0", "b10", "b100", "c1", "c2"],
+        "enumNames": ["A0", "B0", "B10", "B100", "B1", "C2"]
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "title": "Tasks",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "A sample title"
+          },
+          "details": {
+            "type": "string",
+            "title": "Task details",
+            "description": "Enter the task details"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done?",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}

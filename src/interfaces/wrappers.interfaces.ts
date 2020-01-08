@@ -3,7 +3,9 @@ export interface WrapperProps {
 }
 
 export interface FormWrapperProps {
-  children: JSX.Element[];
+  children: (JSX.Element | undefined)[];
+  submitBtn: JSX.Element;
+  resetBtn: JSX.Element;
   onSubmit: (e: any) => void;
 }
 

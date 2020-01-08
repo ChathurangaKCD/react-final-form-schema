@@ -1,16 +1,16 @@
-import React from "react";
-import { UnsupportedField } from "../components/unsupported_field";
-import { useFormSchema } from "../form/schema_context";
-import { RenderBooleanInput } from "./fields/boolean_input";
-import { RenderDateInput, RenderDateTimeInput } from "./fields/date_input";
+import React from 'react';
+import { useFormSchema } from '../form/schema_context';
+import { FieldRendererProps } from '../interfaces/renderers.interfaces';
+import { RenderBooleanInput } from './fields/boolean_input';
+import { RenderDateInput, RenderDateTimeInput } from './fields/date_input';
 import {
   RenderDateRangeInput,
-  RenderDateTimeRangeInput
-} from "./fields/date_range_input";
-import { RenderEnumSelect } from "./fields/enum_select";
-import { RenderNumberInput } from "./fields/number_input";
-import { RenderTextInput } from "./fields/text_input";
-import { FieldRendererProps } from "../interfaces/renderers.interfaces";
+  RenderDateTimeRangeInput,
+} from './fields/date_range_input';
+import { RenderEnumSelect } from './fields/enum_select';
+import { RenderNumberInput } from './fields/number_input';
+import { RenderTextInput } from './fields/text_input';
+import { RenderUnsupportedField } from './fields/unsupported_field';
 
 /**
  * Render Fields
@@ -21,32 +21,32 @@ export function FieldRenderer(props: FieldRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
   const renderData = { ...props, schema, uiSchema };
   switch (schema.type) {
-    case "string": {
+    case 'string': {
       if (Array.isArray(schema.enum)) {
         return <RenderEnumSelect {...renderData} />;
       }
       return <RenderTextInput {...renderData} />;
     }
-    case "number":
-    case "integer": {
+    case 'number':
+    case 'integer': {
       return <RenderNumberInput {...renderData} />;
     }
-    case "boolean": {
+    case 'boolean': {
       return <RenderBooleanInput {...renderData} />;
     }
-    case "date": {
+    case 'date': {
       return <RenderDateInput {...renderData} />;
     }
-    case "datetime": {
+    case 'datetime': {
       return <RenderDateTimeInput {...renderData} />;
     }
-    case "daterange": {
+    case 'daterange': {
       return <RenderDateRangeInput {...renderData} />;
     }
-    case "datetimerange": {
+    case 'datetimerange': {
       return <RenderDateTimeRangeInput {...renderData} />;
     }
     default:
-      return <UnsupportedField {...{ schema, uiSchema, path: dataPath }} />;
+      return <RenderUnsupportedField {...renderData} />;
   }
 }

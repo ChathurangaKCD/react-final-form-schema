@@ -1,6 +1,6 @@
-import React from "react";
-import { UnsupportedField } from "../components/unsupported_field";
+import React from 'react';
+import { RenderUnsupportedField } from './fields/unsupported_field';
 
 export function CustomCompRenderer(props: any) {
-  return <UnsupportedField />;
+  return <RenderUnsupportedField {...props} />;
 }
