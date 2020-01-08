@@ -4,9 +4,17 @@ import { IWrapper } from '../../dist/';
 
 export function FormWrapper({
   children,
+  submitBtn,
+  resetBtn,
   ...otherProps
 }: IWrapper.FormWrapperProps) {
-  return <Form {...otherProps}>{children}</Form>;
+  return (
+    <Form {...otherProps}>
+      {children}
+      {submitBtn}
+      {resetBtn}
+    </Form>
+  );
 }
 
 export function ObjectWrapper({

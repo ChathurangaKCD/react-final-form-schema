@@ -19,6 +19,7 @@ import {
   ObjectItemWrapperProps,
   ObjectWrapperProps,
 } from './wrappers.interfaces';
+import { SubmitBtnProps, ResetBtnProps } from './buttons.interface';
 
 export type Widget<T> = React.FC<T>;
 
@@ -65,5 +66,9 @@ export interface IWidgets {
     'array:itemremove': Widget<ArrayItemRemoveBtnProps>;
     'array:itemadd': Widget<ArrayItemAddBtnProps>;
     field: Widget<any>;
+  };
+  buttons: {
+    submit: Widget<SubmitBtnProps>;
+    reset: Widget<ResetBtnProps>;
   };
 }

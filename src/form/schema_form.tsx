@@ -14,6 +14,8 @@ export function SchemaForm({
   onValueChange,
 }: SchemaFormProps) {
   const FormWrapper = widgets.wrapper.form;
+  const SubmitBtn = widgets.buttons.submit;
+  const ResetBtn = widgets.buttons.reset;
   return (
     <SchemaContextProvider
       schema={schema}
@@ -29,24 +31,33 @@ export function SchemaForm({
         }}
         render={({ handleSubmit, form, submitting, pristine }) => {
           return (
-            <FormWrapper onSubmit={handleSubmit}>
-              <SchemaRenderer dataPath="" schemaPath="" uiPath="" level={0} />
-              <div className="buttons">
-                <button type="submit" disabled={submitting || pristine}>
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={form.reset}
+            <FormWrapper
+              onSubmit={handleSubmit}
+              submitBtn={
+                <SubmitBtn
+                  type="submit"
+                  text={'Submit'}
+                  submitting={submitting}
                   disabled={submitting || pristine}
-                >
-                  Reset
-                </button>
-              </div>
-              <FormSpy
-                subscription={{ values: true }}
-                onChange={onValueChange}
-              ></FormSpy>
+                />
+              }
+              resetBtn={
+                <ResetBtn
+                  type="button"
+                  text={'Reset'}
+                  onClick={form.reset}
+                  submitting={submitting}
+                  disabled={submitting || pristine}
+                />
+              }
+            >
+              <SchemaRenderer dataPath="" schemaPath="" uiPath="" level={0} />
+              {onValueChange && (
+                <FormSpy
+                  subscription={{ values: true }}
+                  onChange={onValueChange}
+                ></FormSpy>
+              )}
             </FormWrapper>
           );
         }}

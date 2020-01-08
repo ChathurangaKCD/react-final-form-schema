@@ -18,6 +18,7 @@ import {
   ObjectItemWrapper,
   ObjectWrapper,
 } from '../wrappers/component_wrappers';
+import { SubmitBtn, ResetBtn } from '../wrappers/buttons';
 
 export const defaultWidgets: IWidgets = {
   number: {
@@ -52,5 +53,9 @@ export const defaultWidgets: IWidgets = {
     'array:itemremove': ArrayItemRemoveBtn,
     'array:itemadd': ArrayItemAddBtn,
     field: FieldWrapper,
+  },
+  buttons: {
+    submit: SubmitBtn,
+    reset: ResetBtn,
   },
 };

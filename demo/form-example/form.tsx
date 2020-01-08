@@ -28,7 +28,14 @@ function DataSubscriber({ children }: any) {
 }
 
 export default function FinalForm() {
-  const onSubmit = useCallback(() => alert('submit'), []);
+  const onSubmit = useCallback(
+    () =>
+      new Promise(resolve => {
+        setTimeout(() => alert('submit'), 3000);
+        resolve();
+      }),
+    []
+  );
   return (
     <div style={{ width: '60%', margin: 'auto', paddingTop: '50px' }}>
       <SchemaForm
