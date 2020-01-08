@@ -14,7 +14,8 @@
   "module": "dist/form-schema-lib.esm.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build-playground":"yarn build && cd demo && yarn build",
+    "build-playground": "yarn build && cd demo && yarn build",
+    "postinstall": "cd demo && yarn",
     "build": "tsdx build",
     "build-storybook": "build-storybook",
     "lint": "tsdx lint",
