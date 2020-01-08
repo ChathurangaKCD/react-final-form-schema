@@ -1,16 +1,16 @@
-import { Schema } from "../interfaces/form.interfaces";
+import { Schema } from '../interfaces/form.interfaces';
 
 export const required = (required: boolean) => (value: any) =>
-  !required || value !== undefined || value !== null ? undefined : "Required";
+  !required || value !== undefined || value !== null ? undefined : 'Required';
 
 export const mustBeNumber = (value: any) =>
-  isNaN(value) ? "Must be a number" : undefined;
+  isNaN(value) ? 'Must be a number' : undefined;
 
 export const minimum = (min: number) => (value: any) =>
   isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
 
 export const maximum = (max: number) => (value: any) =>
-  isNaN(value) || value >= max ? undefined : `Should be smaller than ${max}`;
+  isNaN(value) || value <= max ? undefined : `Should be smaller than ${max}`;
 
 export const minLength = (min: number) => (value: any) =>
   `${value}`.length >= min
@@ -41,7 +41,7 @@ export const validators: { [x: string]: (arg0: any) => validatorFn } = {
   minLength,
   maxLength,
   maximum,
-  minimum
+  minimum,
 };
 
 export function getValidators(schema: Schema, validatorStrs: string[]) {
@@ -52,7 +52,7 @@ export function getValidators(schema: Schema, validatorStrs: string[]) {
         validators[key] !== undefined &&
         validators[key](schema[key])
     )
-    .filter(validator => typeof validator === "function");
+    .filter(validator => typeof validator === 'function');
   const validate = composeValidators(...(_validators as validatorFn[]));
   return { validate };
 }

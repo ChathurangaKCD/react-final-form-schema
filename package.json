@@ -1,6 +1,6 @@
 {
   "name": "react-final-form-schema",
-  "version": "0.1.9",
+  "version": "0.1.14",
   "repository": {
     "type": "git",
     "url": "https://github.com/ChathurangaKCD/react-final-form-schema"
@@ -14,8 +14,7 @@
   "module": "dist/form-schema-lib.esm.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build-playground": "yarn build && cd demo && yarn build",
-    "postinstall": "cd demo && yarn",
+    "build-playground": "yarn build && cd demo && yarn && yarn build",
     "build": "tsdx build",
     "build-storybook": "build-storybook",
     "lint": "tsdx lint",
