@@ -1,10 +1,42 @@
 import { Schema } from '../interfaces/form.interfaces';
+import { useMemo } from 'react';
 
-export const required = (required: boolean) => (value: any) =>
-  !required || value !== undefined || value !== null ? undefined : 'Required';
+// export const isRequired = (required: boolean) => (value: any) =>
+//   !required || value !== undefined || value !== null ? undefined : 'Required';
 
-export const mustBeNumber = (value: any) =>
-  isNaN(value) ? 'Must be a number' : undefined;
+export const mustBeANumber = (value: any) =>
+  isNaN(value) || typeof value !== 'number' ? 'Must be a number' : undefined;
+
+export const mustBeAnInteger = (value: any) =>
+  !Number.isInteger(value) ? 'Must be an integer' : undefined;
+
+export const allowUndefinedAndNull = (
+  validator: validatorFn,
+  allow: boolean
+) => (value: any) => {
+  return allow && (value === undefined || value === null)
+    ? undefined
+    : validator(value);
+};
+
+export const getDefaultValidators = (
+  schemaType: string,
+  required: boolean
+): validatorFn[] => {
+  switch (schemaType) {
+    case 'number': {
+      return [allowUndefinedAndNull(mustBeANumber, true)];
+    }
+    case 'integer': {
+      return [allowUndefinedAndNull(mustBeAnInteger, true)];
+    }
+    case 'string': {
+      return [];
+    }
+    default:
+      return [];
+  }
+};
 
 export const minimum = (min: number) => (value: any) =>
   isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
@@ -44,8 +76,12 @@ export const validators: { [x: string]: (arg0: any) => validatorFn } = {
   minimum,
 };
 
-export function getValidators(schema: Schema, validatorStrs: string[]) {
-  const _validators = validatorStrs
+export function getValidators(
+  schema: Schema,
+  validatorStrs: string[] | null,
+  required: boolean
+) {
+  const _validators = (validatorStrs || [])
     .map(
       key =>
         schema[key] !== undefined &&
@@ -53,6 +89,21 @@ export function getValidators(schema: Schema, validatorStrs: string[]) {
         validators[key](schema[key])
     )
     .filter(validator => typeof validator === 'function');
-  const validate = composeValidators(...(_validators as validatorFn[]));
-  return { validate };
+  const validate = composeValidators(
+    ...getDefaultValidators(schema.type, required),
+    ...(_validators as validatorFn[])
+  );
+  return { validate: validate };
+}
+
+export function useGetValidators(
+  schema: Schema,
+  validatorStrs: string[] | null,
+  required: boolean
+) {
+  return useMemo(() => getValidators(schema, validatorStrs, required), [
+    schema,
+    validatorStrs,
+    required,
+  ]);
 }

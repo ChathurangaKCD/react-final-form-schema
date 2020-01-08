@@ -13,6 +13,7 @@ export interface TextInputProps extends InputFieldProps {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
+    required?: boolean;
   };
 }
 export interface NumberInputProps extends InputFieldProps {
@@ -20,6 +21,7 @@ export interface NumberInputProps extends InputFieldProps {
     step?: number;
     min?: number;
     max?: number;
+    required?: boolean;
   };
 }
 export interface CheckBoxInputProps extends InputFieldProps {}

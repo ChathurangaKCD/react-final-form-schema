@@ -51,7 +51,13 @@ export function SchemaForm({
                 />
               }
             >
-              <SchemaRenderer dataPath="" schemaPath="" uiPath="" level={0} />
+              <SchemaRenderer
+                dataPath=""
+                schemaPath=""
+                uiPath=""
+                level={0}
+                required={false}
+              />
               {onValueChange && (
                 <FormSpy
                   subscription={{ values: true }}

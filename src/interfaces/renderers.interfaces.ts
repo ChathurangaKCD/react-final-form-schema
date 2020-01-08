@@ -1,10 +1,11 @@
-import { Schema, UiSchema } from "./form.interfaces";
+import { Schema, UiSchema } from './form.interfaces';
 
 export interface RendererProps {
   dataPath: string;
   schemaPath: string;
   uiPath: string;
   level: number;
+  required: boolean;
 }
 
 export interface SchemaRendererProps extends RendererProps {}

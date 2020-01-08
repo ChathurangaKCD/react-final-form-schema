@@ -16,6 +16,7 @@ export function RenderEnumSelect({
   schema,
   uiSchema,
   dataPath,
+  required,
   level,
 }: RenderEnumSelectFnProps) {
   const isMultiple = schema.type === 'array';

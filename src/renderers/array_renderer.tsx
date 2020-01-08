@@ -28,6 +28,7 @@ import { SchemaRenderer } from './schema_renderer';
 export function ArrayRenderer({
   dataPath,
   schemaPath,
+  required,
   uiPath,
   level,
 }: ArrayRendererProps) {
@@ -36,25 +37,21 @@ export function ArrayRenderer({
     schema,
     uiSchema,
     dataPath,
+    required,
     uiPath,
     schemaPath,
     level,
   };
   if (Array.isArray(schema.items)) {
-    return renderFixedItemList({
-      schema,
-      uiSchema,
-      dataPath,
-      schemaPath,
-      uiPath,
-      level,
-    });
+    return renderFixedItemList(renderData);
   } else if (schema.items.enum) {
     return <RenderEnumSelect {...renderData} />;
   } else return <RenderNestedArray {...renderData} />;
 }
 
 interface RenderNestedArrayProps extends RenderFnProps {}
+
+const nestedArrayValidatoors = ['isArray', 'minItems', 'maxItems'];
 
 function RenderNestedArray({
   schema,
@@ -91,6 +88,7 @@ function RenderNestedArray({
                 schemaPath={getSchemaSubPath(schemaPath, 'items')}
                 uiPath={getUiSubPath(uiPath, 'items')}
                 level={level + 1}
+                required
               />
             </ArrayItemWrapper>
           ))

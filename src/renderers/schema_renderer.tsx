@@ -16,9 +16,10 @@ export function SchemaRenderer({
   schemaPath = '',
   uiPath = '',
   level = 0,
+  required = false,
 }: SchemaRendererProps) {
   const { schema, uiSchema } = useFormSchema(schemaPath, uiPath);
-  const props = { dataPath, schemaPath, uiPath, level };
+  const props = { dataPath, schemaPath, uiPath, level, required };
   if (schema.field) {
     return <CustomCompRenderer {...props} />;
   } else if (schema.type) {

@@ -1,31 +1,32 @@
-import React from "react";
-import { Field } from "react-final-form";
-import { useWidget, useWrapper } from "../../form/schema_context";
-import { TextInputProps } from "../../interfaces/components.interfaces";
-import { Schema } from "../../interfaces/form.interfaces";
-import { RenderFnProps } from "../../interfaces/renderers.interfaces";
-import { FieldWrapperProps } from "../../interfaces/wrappers.interfaces";
-import { getFieldName } from "../../utils/schema_path_utils";
-import { getValidators } from "../../utils/validators";
+import React from 'react';
+import { Field } from 'react-final-form';
+import { useWidget, useWrapper } from '../../form/schema_context';
+import { TextInputProps } from '../../interfaces/components.interfaces';
+import { Schema } from '../../interfaces/form.interfaces';
+import { RenderFnProps } from '../../interfaces/renderers.interfaces';
+import { FieldWrapperProps } from '../../interfaces/wrappers.interfaces';
+import { getFieldName } from '../../utils/schema_path_utils';
+import { getValidators, useGetValidators } from '../../utils/validators';
 
 interface RenderTextInputFnProps extends RenderFnProps {}
 
-const textValidators = ["minLength", "maxLength"];
+const textValidators = ['minLength', 'maxLength'];
 
 export function RenderTextInput({
   dataPath,
   schemaPath,
   uiPath,
   level,
+  required,
   schema,
-  uiSchema
+  uiSchema,
 }: RenderTextInputFnProps) {
-  const validators = getValidators(schema, textValidators);
+  const validators = useGetValidators(schema, textValidators, required);
   const TextInputWidget = useWidget<TextInputProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget
+    widget: uiSchema && uiSchema.widget,
   });
-  const FieldWrapper = useWrapper<FieldWrapperProps>("field");
+  const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper level={level} isRow={false}>
       <Field name={getFieldName(dataPath)} {...validators}>
@@ -35,7 +36,7 @@ export function RenderTextInput({
             error={meta.touched && meta.error}
             uiSchema={uiSchema}
             input={input}
-            schemaProps={parseTextInputSchema(schema)}
+            schemaProps={parseTextInputSchema(schema, required)}
           />
         )}
       </Field>
@@ -46,11 +47,12 @@ export function RenderTextInput({
 const IFTE = (condition: any, val: any = condition, elseVal: any = undefined) =>
   !!condition ? val : elseVal;
 
-function parseTextInputSchema(schema: Schema) {
+function parseTextInputSchema(schema: Schema, required: boolean) {
   const { minLength, maxLength } = schema;
   const props = {
+    required,
     minLength: IFTE(minLength),
-    maxLength: IFTE(maxLength)
+    maxLength: IFTE(maxLength),
   };
   return props;
 }
