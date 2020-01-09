@@ -18,7 +18,6 @@ export interface ObjectItemWrapperProps extends WrapperProps {
   level: number;
 }
 export interface FieldWrapperProps extends WrapperProps {
-  isRow: boolean;
   level: number;
 }
 export interface ArrayWrapperProps extends WrapperProps {

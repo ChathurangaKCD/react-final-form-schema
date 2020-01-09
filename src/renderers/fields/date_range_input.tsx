@@ -27,7 +27,7 @@ export function RenderDateRangeInput({
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   const validators = useGetValidators(schema, null, required);
   return (
-    <FieldWrapper level={level} isRow={true}>
+    <FieldWrapper level={level}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <DateRangePickerWidget
@@ -58,7 +58,7 @@ export function RenderDateTimeRangeInput({
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   const validators = useGetValidators(schema, null, required);
   return (
-    <FieldWrapper level={level} isRow={true}>
+    <FieldWrapper level={level}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <DateTimeRangePickerWidget

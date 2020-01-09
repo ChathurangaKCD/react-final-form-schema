@@ -22,7 +22,10 @@ export function RenderBooleanInput({
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper isRow={false} level={level}>
-      <Field name={getFieldName(dataPath)}>
+      <Field
+        name={getFieldName(dataPath)}
+        initialValue={schema.default || false}
+      >
         {({ input, meta }) => (
           <CheckBoxWidget
             label={schema.title}

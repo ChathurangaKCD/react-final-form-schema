@@ -29,7 +29,11 @@ export function RenderTextInput({
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper level={level} isRow={false}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        initialValue={schema.default || ''}
+      >
         {({ input, meta }) => (
           <TextInputWidget
             label={schema.title}

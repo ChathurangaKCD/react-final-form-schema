@@ -3,7 +3,10 @@ import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { IComponent } from '../../dist/';
 
-function useControlledNumberInput(inComingValue: number, notifyChange: (nextVal: number) => void) {
+function useControlledNumberInput(
+  inComingValue: number,
+  notifyChange: (nextVal: number) => void
+) {
   const [value, setValue] = useState<string | number>(inComingValue);
   const onChange = useCallback(
     e => {
@@ -18,7 +21,7 @@ function useControlledNumberInput(inComingValue: number, notifyChange: (nextVal:
     [inComingValue, notifyChange]
   );
   const strVal = value.toString();
-  return { value: strVal, onChange }
+  return { value: strVal, onChange };
 }
 
 export function NumberInput({
@@ -28,7 +31,10 @@ export function NumberInput({
   input: { value: inComingValue, onChange: notifyChange, ...input },
   schemaProps,
 }: IComponent.NumberInputProps) {
-  const { value, onChange } = useControlledNumberInput(inComingValue, notifyChange);
+  const { value, onChange } = useControlledNumberInput(
+    inComingValue,
+    notifyChange
+  );
   return (
     <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
@@ -47,7 +53,6 @@ export function NumberInput({
   );
 }
 
-
 export function NumberRangeInput({
   label,
   error,
@@ -55,7 +60,10 @@ export function NumberRangeInput({
   input: { value: inComingValue, onChange: notifyChange, ...input },
   schemaProps,
 }: IComponent.NumberInputProps) {
-  const { value, onChange } = useControlledNumberInput(inComingValue, notifyChange);
+  const { value, onChange } = useControlledNumberInput(
+    inComingValue,
+    notifyChange
+  );
   return (
     <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
@@ -67,7 +75,7 @@ export function NumberRangeInput({
         value={value}
         onChange={onChange}
       />
-      {inComingValue}
+      {value}
       {error && (
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       )}

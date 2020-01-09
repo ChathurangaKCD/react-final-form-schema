@@ -14,6 +14,11 @@
       "title": "Description",
       "maxLength": 20
     },
+    "complete": {
+      "type": "boolean",
+      "title": "Complete?",
+      "default": false
+    },
     "additional": {
       "title": "Additional",
       "type": "object",
@@ -66,7 +71,7 @@
           "minimum": 0
         }
       },
-      "required": ["priorityInt"]
+      "required": ["priority", "priorityInt", "priorityRange"]
     },
     "category": {
       "title": "Category",
@@ -98,7 +103,8 @@
           "details": {
             "type": "string",
             "title": "Task details",
-            "description": "Enter the task details"
+            "description": "Enter the task details",
+            "default": "Detailts default"
           },
           "done": {
             "type": "boolean",

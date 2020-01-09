@@ -6,7 +6,7 @@ import { Schema } from '../../interfaces/form.interfaces';
 import { RenderFnProps } from '../../interfaces/renderers.interfaces';
 import { FieldWrapperProps } from '../../interfaces/wrappers.interfaces';
 import { getFieldName } from '../../utils/schema_path_utils';
-import { getValidators } from '../../utils/validators';
+import { useGetValidators } from '../../utils/validators';
 
 interface RenderNumberInputFnProps extends RenderFnProps {}
 
@@ -21,7 +21,7 @@ export function RenderNumberInput({
   schema,
   uiSchema,
 }: RenderNumberInputFnProps) {
-  const validators = getValidators(schema, numberValidators, required);
+  const validators = useGetValidators(schema, numberValidators, required);
   const NumberInputWidget = useWidget<NumberInputProps>({
     type: schema.type,
     widget: uiSchema && uiSchema.widget,
@@ -50,7 +50,7 @@ const IFTE = (condition: any, val: any = condition, elseVal: any = undefined) =>
 function parseNumberInputSchema(schema: Schema, required: boolean) {
   const { multipleOf, maximum, minimum, type } = schema;
   const props = {
-    required,
+    // required,
     step: IFTE(
       type === 'integer',
       IFTE(multipleOf, multipleOf, 1),

@@ -25,10 +25,10 @@ export const getDefaultValidators = (
 ): validatorFn[] => {
   switch (schemaType) {
     case 'number': {
-      return [allowUndefinedAndNull(mustBeANumber, true)];
+      return [allowUndefinedAndNull(mustBeANumber, !required)];
     }
     case 'integer': {
-      return [allowUndefinedAndNull(mustBeAnInteger, true)];
+      return [allowUndefinedAndNull(mustBeAnInteger, !required)];
     }
     case 'string': {
       return [];
@@ -101,9 +101,9 @@ export function useGetValidators(
   validatorStrs: string[] | null,
   required: boolean
 ) {
-  return useMemo(() => getValidators(schema, validatorStrs, required), [
-    schema,
-    validatorStrs,
-    required,
-  ]);
+  const validators = useMemo(
+    () => getValidators(schema, validatorStrs, required),
+    [schema, validatorStrs, required]
+  );
+  return validators;
 }
