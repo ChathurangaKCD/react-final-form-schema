@@ -28,7 +28,7 @@ export function RenderTextInput({
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper level={level} isRow={false}>
+    <FieldWrapper level={level}>
       <Field
         name={getFieldName(dataPath)}
         {...validators}

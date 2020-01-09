@@ -21,7 +21,7 @@ export function RenderBooleanInput({
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper isRow={false} level={level}>
+    <FieldWrapper level={level}>
       <Field
         name={getFieldName(dataPath)}
         initialValue={schema.default || false}

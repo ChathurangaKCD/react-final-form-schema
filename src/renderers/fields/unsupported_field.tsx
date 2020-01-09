@@ -15,7 +15,7 @@ export function RenderUnsupportedField(props: RenderUnsupportedFieldFnProps) {
   const UnsupportedField = useWidget<any>({ type: 'unsupported' });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper isRow={false} level={level}>
+    <FieldWrapper level={level}>
       <UnsupportedField {...props}></UnsupportedField>
     </FieldWrapper>
   );

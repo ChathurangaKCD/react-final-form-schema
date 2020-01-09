@@ -30,7 +30,7 @@ export function RenderEnumSelect({
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper isRow={false} level={level}>
+    <FieldWrapper level={level}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
           <SelectFieldWidget
