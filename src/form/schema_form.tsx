@@ -4,6 +4,9 @@ import { Form, FormSpy } from 'react-final-form';
 import { SchemaRenderer } from '../renderers/schema_renderer';
 import { SchemaContextProvider } from './schema_context';
 import { SchemaFormProps } from '../interfaces/form.interfaces';
+import createDecorator from 'final-form-focus';
+
+const focusOnError = createDecorator();
 
 export function SchemaForm({
   schema,
@@ -29,6 +32,7 @@ export function SchemaForm({
         mutators={{
           ...arrayMutators,
         }}
+        decorators={[focusOnError]}
         render={({ handleSubmit, form, submitting, pristine }) => {
           return (
             <FormWrapper
@@ -62,12 +66,12 @@ export function SchemaForm({
                 <FormSpy
                   subscription={{ values: true }}
                   onChange={onValueChange}
-                ></FormSpy>
+                />
               )}
             </FormWrapper>
           );
         }}
-      ></Form>
+      />
     </SchemaContextProvider>
   );
 }

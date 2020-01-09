@@ -4,22 +4,27 @@ import { useMemo } from 'react';
 // export const isRequired = (required: boolean) => (value: any) =>
 //   !required || value !== undefined || value !== null ? undefined : 'Required';
 
-export const mustBeANumber = (value: any) =>
+const mustBeAString = (value: any) => {
+  return typeof value !== 'string' || value.length === 0
+    ? 'Required'
+    : undefined;
+};
+
+const mustBeANumber = (value: any) =>
   isNaN(value) || typeof value !== 'number' ? 'Must be a number' : undefined;
 
-export const mustBeAnInteger = (value: any) =>
+const mustBeAnInteger = (value: any) =>
   !Number.isInteger(value) ? 'Must be an integer' : undefined;
 
-export const allowUndefinedAndNull = (
-  validator: validatorFn,
-  allow: boolean
-) => (value: any) => {
+const allowUndefinedAndNull = (validator: validatorFn, allow: boolean) => (
+  value: any
+) => {
   return allow && (value === undefined || value === null)
     ? undefined
     : validator(value);
 };
 
-export const getDefaultValidators = (
+const getDefaultValidators = (
   schemaType: string,
   required: boolean
 ): validatorFn[] => {
@@ -31,30 +36,30 @@ export const getDefaultValidators = (
       return [allowUndefinedAndNull(mustBeAnInteger, !required)];
     }
     case 'string': {
-      return [];
+      return [allowUndefinedAndNull(mustBeAString, !required)];
     }
     default:
       return [];
   }
 };
 
-export const minimum = (min: number) => (value: any) =>
+const minimum = (min: number) => (value: any) =>
   isNaN(value) || value >= min ? undefined : `Should be greater than ${min}`;
 
-export const maximum = (max: number) => (value: any) =>
+const maximum = (max: number) => (value: any) =>
   isNaN(value) || value <= max ? undefined : `Should be smaller than ${max}`;
 
-export const minLength = (min: number) => (value: any) =>
+const minLength = (min: number) => (value: any) =>
   `${value}`.length >= min
     ? undefined
     : `Should be longer than ${min} charachters`;
 
-export const maxLength = (max: number) => (value: any) =>
+const maxLength = (max: number) => (value: any) =>
   `${value}`.length <= max
     ? undefined
     : `Should be shorter than ${max} charachters`;
 
-export type validatorFn = (value: any) => string | undefined;
+type validatorFn = (value: any) => string | undefined;
 
 function reduceValidators(
   value: any
@@ -65,18 +70,17 @@ function reduceValidators(
   return (error, validator) => error || validator(value);
 }
 
-export const composeValidators = (...validators: validatorFn[]) => (
-  value: any
-) => validators.reduce(reduceValidators(value), undefined);
+const composeValidators = (...validators: validatorFn[]) => (value: any) =>
+  validators.reduce(reduceValidators(value), undefined);
 
-export const validators: { [x: string]: (arg0: any) => validatorFn } = {
+const validators: { [x: string]: (arg0: any) => validatorFn } = {
   minLength,
   maxLength,
   maximum,
   minimum,
 };
 
-export function getValidators(
+function getValidators(
   schema: Schema,
   validatorStrs: string[] | null,
   required: boolean

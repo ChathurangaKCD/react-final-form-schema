@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface WrapperProps {
   children: React.ReactNode;
 }
@@ -24,6 +26,7 @@ export interface ArrayWrapperProps extends WrapperProps {
   title: string;
   level: number;
   children: JSX.Element[] | JSX.Element;
+  itemAddBtn: JSX.Element;
 }
 export interface ArrayItemWrapperProps extends WrapperProps {
   level: number;

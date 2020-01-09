@@ -70,38 +70,43 @@ function RenderNestedArray({
   );
   const ArrayItemAddBtn = useWrapper<ArrayItemAddBtnProps>('array:itemadd');
   return (
-    <ArrayWrapper title={title} level={level}>
-      {/* subscribe only to array length; 
+    <>
+      {/* subscribe only to array length;
         if reordering needed subscribe to value */}
       <FieldArray name={dataPath} subscription={{}} validate={undefined}>
-        {({ fields }) =>
-          fields.map((name, index) => (
-            <ArrayItemWrapper
-              key={name}
-              level={level + 1}
-              buttons={
-                <ArrayItemRemoveBtn onClick={() => fields.remove(index)} />
-              }
-            >
-              <SchemaRenderer
-                dataPath={name}
-                schemaPath={getSchemaSubPath(schemaPath, 'items')}
-                uiPath={getUiSubPath(uiPath, 'items')}
+        {({ fields }) => (
+          <ArrayWrapper
+            title={title}
+            level={level}
+            itemAddBtn={
+              <ArrayItemAddBtn
+                onClick={() => formApi.mutators.push(dataPath, undefined)}
+              >
+                Add
+              </ArrayItemAddBtn>
+            }
+          >
+            {fields.map((name, index) => (
+              <ArrayItemWrapper
+                key={name}
                 level={level + 1}
-                required
-              />
-            </ArrayItemWrapper>
-          ))
-        }
+                buttons={
+                  <ArrayItemRemoveBtn onClick={() => fields.remove(index)} />
+                }
+              >
+                <SchemaRenderer
+                  dataPath={name}
+                  schemaPath={getSchemaSubPath(schemaPath, 'items')}
+                  uiPath={getUiSubPath(uiPath, 'items')}
+                  level={level + 1}
+                  required
+                />
+              </ArrayItemWrapper>
+            ))}
+          </ArrayWrapper>
+        )}
       </FieldArray>
-      <div className="buttons">
-        <ArrayItemAddBtn
-          onClick={() => formApi.mutators.push(dataPath, undefined)}
-        >
-          Add
-        </ArrayItemAddBtn>
-      </div>
-    </ArrayWrapper>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ import { Schema } from '../../interfaces/form.interfaces';
 import { RenderFnProps } from '../../interfaces/renderers.interfaces';
 import { FieldWrapperProps } from '../../interfaces/wrappers.interfaces';
 import { getFieldName } from '../../utils/schema_path_utils';
-import { getValidators, useGetValidators } from '../../utils/validators';
+import { useGetValidators } from '../../utils/validators';
 
 interface RenderTextInputFnProps extends RenderFnProps {}
 

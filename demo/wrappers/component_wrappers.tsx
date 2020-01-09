@@ -50,6 +50,7 @@ export function ArrayWrapper({
   title,
   level,
   children,
+  itemAddBtn,
   ...wrapperProps
 }: IWrapper.ArrayWrapperProps) {
   const titleComp =
@@ -63,6 +64,7 @@ export function ArrayWrapper({
       <Form.Row {...wrapperProps} className="border-left mb-2">
         {titleComp}
         {children}
+        {itemAddBtn}
       </Form.Row>
     </Col>
   );
@@ -127,13 +129,12 @@ export function ArrayItemAddBtn({
 }
 
 export function FieldWrapper({
-  isRow,
   level,
   children,
   ...wrapperProps
 }: IWrapper.FieldWrapperProps) {
   return (
-    <Col md={level === 1 || isRow ? 12 : 6} {...wrapperProps}>
+    <Col md={level === 1 ? 12 : 6} {...wrapperProps}>
       {children}
     </Col>
   );
