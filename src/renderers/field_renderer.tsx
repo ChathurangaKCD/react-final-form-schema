@@ -14,7 +14,7 @@ import { RenderUnsupportedField } from './fields/unsupported_field';
 
 /**
  * Render Fields
- * @param {*} param0
+ * @param props
  */
 export function FieldRenderer(props: FieldRendererProps) {
   const { dataPath, schemaPath, uiPath, level } = props;

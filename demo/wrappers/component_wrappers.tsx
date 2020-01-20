@@ -6,10 +6,9 @@ export function FormWrapper({
   children,
   submitBtn,
   resetBtn,
-  ...otherProps
 }: IWrapper.FormWrapperProps) {
   return (
-    <Form {...otherProps}>
+    <Form>
       {children}
       {submitBtn}
       {resetBtn}
@@ -51,7 +50,6 @@ export function ArrayWrapper({
   level,
   children,
   itemAddBtn,
-  ...wrapperProps
 }: IWrapper.ArrayWrapperProps) {
   const titleComp =
     level === 0 && title ? null : (
@@ -61,7 +59,7 @@ export function ArrayWrapper({
     );
   return (
     <Col md={12} className="ml-2">
-      <Form.Row {...wrapperProps} className="border-left mb-2">
+      <Form.Row className="border-left mb-2">
         {titleComp}
         {children}
         {itemAddBtn}
@@ -75,7 +73,6 @@ export function ArrayItemWrapper({
   level,
   children,
   buttons,
-  ...wrapperProps
 }: IWrapper.ArrayItemWrapperProps) {
   const wrappedChildren = isField ? (
     children
@@ -128,14 +125,6 @@ export function ArrayItemAddBtn({
   );
 }
 
-export function FieldWrapper({
-  level,
-  children,
-  ...wrapperProps
-}: IWrapper.FieldWrapperProps) {
-  return (
-    <Col md={level === 1 ? 12 : 6} {...wrapperProps}>
-      {children}
-    </Col>
-  );
+export function FieldWrapper({ level, children }: IWrapper.FieldWrapperProps) {
+  return <Col md={level === 1 ? 12 : 6}>{children}</Col>;
 }

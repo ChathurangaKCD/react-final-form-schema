@@ -78,6 +78,7 @@ function RenderNestedArray({
           <ArrayWrapper
             title={title}
             level={level}
+            uiSchema={uiSchema}
             itemAddBtn={
               <ArrayItemAddBtn
                 onClick={() => formApi.mutators.push(dataPath, undefined)}
@@ -90,6 +91,7 @@ function RenderNestedArray({
               <ArrayItemWrapper
                 key={name}
                 level={level + 1}
+                uiSchema={uiSchema}
                 buttons={
                   <ArrayItemRemoveBtn onClick={() => fields.remove(index)} />
                 }

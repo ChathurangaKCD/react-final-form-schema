@@ -24,11 +24,11 @@ export function RenderNumberInput({
   const validators = useGetValidators(schema, numberValidators, required);
   const NumberInputWidget = useWidget<NumberInputProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget,
+    widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <NumberInputWidget

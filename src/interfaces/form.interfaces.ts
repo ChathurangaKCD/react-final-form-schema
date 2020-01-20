@@ -1,10 +1,10 @@
-import { Form } from "react-final-form";
-import { IWidgets } from "./widgets.interfaces";
+import { Form } from 'react-final-form';
+import { IWidgets } from './widgets.interfaces';
 
 type KeyValueObj = { [x: string]: any };
 
 export type Schema = KeyValueObj;
-export type UiSchema = KeyValueObj | null | undefined;
+export type UiSchema = KeyValueObj;
 
 export interface SchemaFormProps {
   schema: Schema;

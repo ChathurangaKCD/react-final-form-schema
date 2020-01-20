@@ -22,12 +22,12 @@ export function RenderDateInput({
 }: RenderDateInputFnProps) {
   const DatePickerWidget = useWidget<DatePickerProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget,
+    widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   const validators = useGetValidators(schema, null, required);
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <DatePickerWidget
@@ -52,12 +52,12 @@ export function RenderDateTimeInput({
 }: RenderDateInputFnProps) {
   const DateTimePickerWidget = useWidget<DateTimePickerProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget,
+    widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   const validators = useGetValidators(schema, null, required);
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field name={getFieldName(dataPath)} {...validators}>
         {({ input, meta }) => (
           <DateTimePickerWidget

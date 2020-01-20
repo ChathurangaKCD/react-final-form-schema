@@ -26,11 +26,11 @@ export function RenderEnumSelect({
 
   const SelectFieldWidget = useWidget<SelectFieldProps>({
     type: schema.type,
-    widget: (uiSchema && uiSchema.widget) || 'enum',
+    widget: (uiSchema && uiSchema['ui:widget']) || 'enum',
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field name={getFieldName(dataPath)}>
         {({ input, meta }) => (
           <SelectFieldWidget

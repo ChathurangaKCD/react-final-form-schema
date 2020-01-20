@@ -36,13 +36,17 @@ export function ObjectRenderer({
     return (key: string) => map.get(key) || false;
   }, [required]);
   return (
-    <ObjectWrapper title={title} level={level}>
+    <ObjectWrapper title={title} level={level} uiSchema={uiSchema}>
       {Object.keys(schemaObj).map(key => {
         const schemaSubPath = getSchemaSubPath(schemaPath, `properties.${key}`);
         const dataSubPath = getDataSubPath(dataPath, key);
         const uiSubPath = getUiSubPath(uiPath, key);
         return (
-          <ObjectItemWrapper key={dataSubPath} level={level + 1}>
+          <ObjectItemWrapper
+            key={dataSubPath}
+            level={level + 1}
+            uiSchema={uiSchema}
+          >
             <SchemaRenderer
               dataPath={dataSubPath}
               schemaPath={schemaSubPath}

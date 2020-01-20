@@ -10,7 +10,7 @@ const focusOnError = createDecorator();
 
 export function SchemaForm({
   schema,
-  uiSchema = null,
+  uiSchema,
   initialValues = {},
   widgets,
   onSubmit,

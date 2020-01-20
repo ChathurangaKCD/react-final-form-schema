@@ -44,6 +44,7 @@ export interface IWidgets {
   };
   string: {
     default: Widget<TextInputProps>;
+    [x: string]: Widget<TextInputProps> | Widget<SelectFieldProps>;
     enum: Widget<SelectFieldProps>;
   };
   boolean: {

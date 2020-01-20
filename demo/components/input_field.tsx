@@ -14,6 +14,7 @@ export function TextInput({
   const formControlProps: any = {};
   if (uiSchema && allowedInputWidgets.includes(uiSchema['ui:widget'])) {
     formControlProps.as = uiSchema['ui:widget'];
+    formControlProps.rows = uiSchema['ui:rows'];
   }
   return (
     <Form.Group controlId={input.name}>

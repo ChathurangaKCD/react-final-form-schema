@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface WrapperProps {
   children: React.ReactNode;
+  uiSchema: { [x: string]: any };
 }
 
 export interface FormWrapperProps {

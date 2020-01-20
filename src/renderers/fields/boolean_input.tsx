@@ -17,14 +17,15 @@ export function RenderBooleanInput({
 }: RenderBooleanInputFnProps) {
   const CheckBoxWidget = useWidget<CheckBoxInputProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget,
+    widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field
         name={getFieldName(dataPath)}
         initialValue={schema.default || false}
+        type="checkbox"
       >
         {({ input, meta }) => (
           <CheckBoxWidget
@@ -32,6 +33,7 @@ export function RenderBooleanInput({
             input={input}
             {...schema.fieldProps}
             error={meta.touched && meta.error}
+            uiSchema={uiSchema}
           />
         )}
       </Field>

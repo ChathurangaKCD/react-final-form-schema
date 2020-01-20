@@ -24,11 +24,11 @@ export function RenderTextInput({
   const validators = useGetValidators(schema, textValidators, required);
   const TextInputWidget = useWidget<TextInputProps>({
     type: schema.type,
-    widget: uiSchema && uiSchema.widget,
+    widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
-    <FieldWrapper level={level}>
+    <FieldWrapper level={level} uiSchema={uiSchema}>
       <Field
         name={getFieldName(dataPath)}
         {...validators}
