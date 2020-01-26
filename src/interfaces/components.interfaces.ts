@@ -31,25 +31,25 @@ export interface SelectFieldProps extends InputFieldProps {
   multiple: boolean;
 }
 export interface DateTimePickerProps extends InputFieldProps {
-  min?: number | null;
-  max?: number | null;
+  min?: string | null;
+  max?: string | null;
   dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
 }
 export interface DateTimeRangePickerProps extends InputFieldProps {
-  min?: number | null;
-  max?: number | null;
+  min?: string | null;
+  max?: string | null;
   dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
 }
 
 export interface DateRangePickerProps extends InputFieldProps {
-  min?: number | null;
-  max?: number | null;
+  min?: string | null;
+  max?: string | null;
 }
 export interface DatePickerProps extends InputFieldProps {
-  min?: number | null;
-  max?: number | null;
+  min?: string | null;
+  max?: string | null;
 }

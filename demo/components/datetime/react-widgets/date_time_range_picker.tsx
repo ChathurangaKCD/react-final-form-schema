@@ -36,6 +36,7 @@ export function CustomDateTimeRangePicker({
           uiSchema={uiSchema}
           error={false}
           label="from"
+          dateOnly={false}
         ></CustomDateTimePicker>
       </Col>
       <Col>
@@ -45,6 +46,7 @@ export function CustomDateTimeRangePicker({
           required={required}
           uiSchema={uiSchema}
           error={false}
+          dateOnly={false}
           label="to"
         ></CustomDateTimePicker>
       </Col>
