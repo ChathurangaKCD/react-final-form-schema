@@ -21,7 +21,7 @@ export function RenderDateInput({
   uiSchema,
 }: RenderDateInputFnProps) {
   const DatePickerWidget = useWidget<DatePickerProps>({
-    type: schema.type,
+    type: schema['ui:field'],
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
@@ -51,7 +51,7 @@ export function RenderDateTimeInput({
   uiSchema,
 }: RenderDateInputFnProps) {
   const DateTimePickerWidget = useWidget<DateTimePickerProps>({
-    type: schema.type,
+    type: schema['ui:field'],
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');

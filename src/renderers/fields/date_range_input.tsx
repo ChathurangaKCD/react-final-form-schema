@@ -21,7 +21,7 @@ export function RenderDateRangeInput({
   uiSchema,
 }: RenderDateInputFnProps) {
   const DateRangePickerWidget = useWidget<DateRangePickerProps>({
-    type: schema.type,
+    type: schema['ui:field'],
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
@@ -52,7 +52,7 @@ export function RenderDateTimeRangeInput({
   uiSchema,
 }: RenderDateInputFnProps) {
   const DateTimeRangePickerWidget = useWidget<DateTimeRangePickerProps>({
-    type: schema.type,
+    type: schema['ui:field'],
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
