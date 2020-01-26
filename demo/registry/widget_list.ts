@@ -39,15 +39,15 @@ export const defaultWidgets: IWidgets = {
   boolean: {
     default: CheckBoxField,
   },
+  date: { default: ReactDatePicker },
+  datetime: { default: DateTimePickers.DateTime },
+  daterange: { default: ReactDateRangePicker },
+  datetimerange: { default: DateTimePickers.DateTimeRange },
   object: {},
   array: {
     enum: SelectField,
   },
   custom: {
-    date: { widgets: { default: ReactDatePicker } },
-    datetime: { widgets: { default: DateTimePickers.DateTime } },
-    daterange: { widgets: { default: ReactDateRangePicker } },
-    datetimerange: { widgets: { default: DateTimePickers.DateTimeRange } },
     ipv4: { widgets: { default: TextInput, 'ipv4:masked': NumberInput } },
   },
   unsupported: { default: UnsupportedField },

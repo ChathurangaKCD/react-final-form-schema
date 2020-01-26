@@ -51,6 +51,10 @@ export interface IWidgets {
   boolean: {
     default: Widget<CheckBoxInputProps>;
   };
+  date: { default: Widget<DatePickerProps> };
+  datetime: { default: Widget<DateTimePickerProps> };
+  daterange: { default: Widget<DateRangePickerProps> };
+  datetimerange: { default: Widget<DateTimeRangePickerProps> };
   object: {};
   array: { enum: Widget<SelectFieldProps> };
   unsupported: { default: Widget<InputFieldProps> };
