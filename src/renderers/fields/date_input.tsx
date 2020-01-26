@@ -1,10 +1,6 @@
 import React from 'react';
 import { Field } from 'react-final-form';
-import {
-  useWidget,
-  useWrapper,
-  useCustomFieldWidget,
-} from '../../form/schema_context';
+import { useWidget, useWrapper } from '../../form/schema_context';
 import {
   DatePickerProps,
   DateTimePickerProps,
@@ -24,8 +20,8 @@ export function RenderDateInput({
   schema,
   uiSchema,
 }: RenderDateInputFnProps) {
-  const DatePickerWidget = useCustomFieldWidget<DatePickerProps>({
-    fieldType: schema['ui:field'],
+  const DatePickerWidget = useWidget<DatePickerProps>({
+    type: schema.type,
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
@@ -54,8 +50,8 @@ export function RenderDateTimeInput({
   schema,
   uiSchema,
 }: RenderDateInputFnProps) {
-  const DateTimePickerWidget = useCustomFieldWidget<DateTimePickerProps>({
-    fieldType: schema['ui:field'],
+  const DateTimePickerWidget = useWidget<DateTimePickerProps>({
+    type: schema.type,
     widget: uiSchema && uiSchema['ui:widget'],
   });
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
