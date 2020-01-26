@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { IComponent } from '../../dist/';
+import { getErrorMessage } from './../wrappers/error_messages';
 
 function useControlledNumberInput(
   inComingValue: number,
@@ -47,7 +48,9 @@ export function NumberInput({
         onChange={onChange}
       />
       {error && (
-        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          {getErrorMessage(error)}
+        </Form.Control.Feedback>
       )}
     </Form.Group>
   );
@@ -77,7 +80,9 @@ export function NumberRangeInput({
       />
       {value}
       {error && (
-        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+        <Form.Control.Feedback type="invalid">
+          {getErrorMessage(error)}
+        </Form.Control.Feedback>
       )}
     </Form.Group>
   );

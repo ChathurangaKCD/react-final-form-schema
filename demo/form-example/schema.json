@@ -1,4 +1,42 @@
 {
+  "definitions": {
+    "daterange": {
+      "type": "array",
+      "items": [
+        { "$ref": "#/definitions/date" },
+        { "$ref": "#/definitions/date" }
+      ],
+      "ui:field": "daterange",
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "datetimerange": {
+      "type": "array",
+      "items": [
+        { "$ref": "#/definitions/datetime" },
+        {
+          "$ref": "#/definitions/datetime",
+          "formatMinimum": {
+            "$data": "1/0"
+          }
+        }
+      ],
+      "ui:field": "datetimerange",
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "date": { "type": "string", "format": "date", "ui:field": "date" },
+    "datetime": {
+      "type": "string",
+      "format": "date-time",
+      "ui:field": "datetime"
+    },
+    "ipv4": {
+      "type": "string",
+      "format": "ipv4",
+      "ui:field": "ipv4"
+    }
+  },
   "title": "A list of tasks",
   "type": "object",
   "required": ["title", "desc"],
@@ -14,6 +52,10 @@
       "title": "Description",
       "maxLength": 20
     },
+    "ipaddress": {
+      "$ref": "#/definitions/ipv4",
+      "title": "IP Address"
+    },
     "complete": {
       "type": "boolean",
       "title": "Complete?",
@@ -27,26 +69,24 @@
           "type": "array",
           "title": "Sub Tasks",
           "items": {
-            "type": "string"
+            "type": "string",
+            "minLength": 5
           }
         },
-        "unsupportedfield": {
-          "type": "a"
-        },
         "date": {
-          "type": "date",
+          "$ref": "#/definitions/date",
           "title": "Date"
         },
         "datetime": {
-          "type": "datetime",
+          "$ref": "#/definitions/datetime",
           "title": "DateTime"
         },
         "daterange": {
-          "type": "daterange",
+          "$ref": "#/definitions/daterange",
           "title": "Date range"
         },
         "datetimerange": {
-          "type": "datetimerange",
+          "$ref": "#/definitions/datetimerange",
           "title": "Datetime range"
         },
         "priority": {
@@ -61,7 +101,7 @@
           "title": "PriorityInt",
           "multipleOf": 2,
           "maximum": 10,
-          "minimum": 0
+          "minimum": { "$data": "1/priority" }
         },
         "priorityRange": {
           "type": "integer",
@@ -71,7 +111,7 @@
           "minimum": 0
         }
       },
-      "required": ["priority", "priorityInt", "priorityRange"]
+      "required": ["priority", "datetimerange"]
     },
     "category": {
       "title": "Category",

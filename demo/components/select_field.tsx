@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { SelectFieldProps } from '../../dist/interfaces/components.interfaces';
+import { getErrorMessage } from './../wrappers/error_messages';
 
 // export function SimpleSelectField({
 //   label,
@@ -71,6 +72,11 @@ export function SelectField(props: SelectFieldProps) {
     <Form.Group controlId={mappedProps.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
       <Select isSearchable={true} {...mappedProps} />
+      {error && (
+        <Form.Control.Feedback type="invalid">
+          {getErrorMessage(error)}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 }

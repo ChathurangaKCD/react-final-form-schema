@@ -5,12 +5,16 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { Form } from 'react-bootstrap';
 import { DatePickerProps } from '../../../../dist/interfaces/components.interfaces';
+import { getErrorMessage } from './../../../wrappers/error_messages';
 
 type Date = moment.Moment | null;
+
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 export function ReactDatePicker({
   label,
   input: { value, onChange, ...input },
+  error,
 }: DatePickerProps) {
   const [date, setDate] = useState<Date>(value ? moment(value) : null);
 
@@ -18,7 +22,7 @@ export function ReactDatePicker({
   const onChangeDate = useCallback(
     (newVal: Date) => {
       setDate(newVal);
-      const val = newVal === null ? null : newVal.valueOf();
+      const val = newVal === null ? null : newVal.format(DATE_FORMAT);
       onChange(val);
     },
     [onChange]
@@ -35,6 +39,11 @@ export function ReactDatePicker({
         isOutsideRange={() => false}
         small={true}
       />
+      {error && (
+        <Form.Control.Feedback type="invalid">
+          {getErrorMessage(error)}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 }

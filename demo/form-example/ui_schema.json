@@ -8,6 +8,7 @@
     "ui:widget": "textarea",
     "ui:rows": 5
   },
+  "ipaddress": {},
   "additional": {
     "datetime": {},
     "daterange": {

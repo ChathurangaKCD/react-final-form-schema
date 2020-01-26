@@ -1,6 +1,5 @@
-import Ajv from 'ajv';
 import _get from 'lodash.get';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useRef } from 'react';
 import {
   Schema,
   SchemaContextProps,
@@ -9,34 +8,24 @@ import {
 } from '../interfaces/form.interfaces';
 import { Widget, WrapperTypes } from '../interfaces/widgets.interfaces';
 
-const ajv = new Ajv();
-
 const FormSchemaContext = React.createContext<SchemaContextValue>(
   (null as unknown) as SchemaContextValue
 );
 
 export function SchemaContextProvider({
-  schema,
+  schema: schema,
   uiSchema,
   widgets,
   defs = null,
   children,
 }: SchemaContextProps) {
   if (!schema) throw new Error('SCHEMA_REQUIRED');
-  const [valid, setValidity] = useState(true);
-  useEffect(() => {
-    const valid = ajv.validateSchema(schema);
-    setValidity(true);
-    console.log('Validity', valid);
-    return setValidity(true);
-  }, [schema]);
   const countRef = useRef(0);
   const contextVal = useMemo(() => {
     countRef.current !== 0 && console.warn('Schema Context Changed');
     countRef.current++;
     return { schema, uiSchema, widgets };
   }, [schema, uiSchema, widgets]);
-  if (!valid) return <h5>"Schema Error"</h5>;
   return (
     <FormSchemaContext.Provider value={contextVal}>
       {children}
@@ -58,12 +47,28 @@ interface IUseWidget {
   type: string;
   widget?: string;
 }
+interface IUseCustomFieldWidget {
+  fieldType: string;
+  widget?: string;
+}
 
 export function useWidget<T>({ type, widget }: IUseWidget): Widget<T> {
   const { widgets } = useContext(FormSchemaContext);
-  const Comp =
-    _get(widgets, `${type}.${widget}`) || _get(widgets, `${type}.${'default'}`);
-  if (!Comp) console.log('Undefined', type, widget);
+  const Comp = _get(widgets, `${type}.${widget || 'default'}`);
+  if (!Comp) throw Error(`No such widget ${type} ${widget}`);
+  return Comp as Widget<T>;
+}
+
+export function useCustomFieldWidget<T>({
+  fieldType,
+  widget,
+}: IUseCustomFieldWidget): Widget<T> {
+  const { widgets } = useContext(FormSchemaContext);
+  const Comp = _get(
+    widgets,
+    `custom.${fieldType}.widgets.${widget || 'default'}`
+  );
+  if (!Comp) throw Error(`No such widget ${fieldType} ${widget || 'default'}`);
   return Comp as Widget<T>;
 }
 

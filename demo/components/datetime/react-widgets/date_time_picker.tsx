@@ -1,12 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { DatePicker, DateTimePicker } from 'react-widgets';
-import dateFnsLocalizer from 'react-widgets-date-fns';
+import { DateTimePicker } from 'react-widgets';
 import { DateTimePickerProps } from '../../../../dist/interfaces/components.interfaces';
-// import "./date_time_picker.scss";
-dateFnsLocalizer();
+import { getErrorMessage } from './../../../wrappers/error_messages';
 
-function useParsedDate(value: number | null) {
+function useParsedDate(value: string | null) {
   return useMemo(() => {
     return !!value ? new Date(value) : null;
   }, [value]);
@@ -20,14 +18,15 @@ export function CustomDateTimePicker({
   readOnly = false,
   dateOnly = false,
   required = false,
+  error,
 }: DateTimePickerProps) {
   const inComingValue = useParsedDate(value);
   const inComingMinValue = useParsedDate(min);
   const inComingMaxValue = useParsedDate(max);
 
   const onChangeValue = useCallback(
-    nextValue => {
-      const next = nextValue ? nextValue.getTime() : null;
+    (nextValue: Date | undefined) => {
+      const next = nextValue ? nextValue.toISOString() : null;
       onChange(next);
     },
     [onChange]
@@ -48,15 +47,19 @@ export function CustomDateTimePicker({
   if (inComingMaxValue) {
     props.max = inComingMaxValue;
   }
-  const Picker = dateOnly ? DatePicker : DateTimePicker;
   return (
     <Form.Group>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
-      <Picker
+      <DateTimePicker
         {...props}
         {...input}
         // containerClassName={"col-md-4"}
       />
+      {error && (
+        <Form.Control.Feedback type="invalid">
+          {getErrorMessage(error)}
+        </Form.Control.Feedback>
+      )}
     </Form.Group>
   );
 }

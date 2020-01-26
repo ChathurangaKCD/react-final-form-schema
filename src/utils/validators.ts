@@ -105,9 +105,11 @@ export function useGetValidators(
   validatorStrs: string[] | null,
   required: boolean
 ) {
-  const validators = useMemo(
-    () => getValidators(schema, validatorStrs, required),
-    [schema, validatorStrs, required]
-  );
-  return validators;
+  return undefined;
+
+  // const validators = useMemo(
+  //   () => getValidators(schema, validatorStrs, required),
+  //   [schema, validatorStrs, required]
+  // );
+  // return validators;
 }

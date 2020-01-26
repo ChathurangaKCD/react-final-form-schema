@@ -1,13 +1,16 @@
+import { IWidgets } from '../../dist/';
 import { CheckBoxField } from '../components/checkbox_field.';
 import { ReactDatePicker } from '../components/datetime/react-dates/date_picker';
 import { ReactDateRangePicker } from '../components/datetime/react-dates/date_range_picker';
-import { CustomDateTimePicker } from '../components/datetime/react-widgets/date_time_picker';
-import { CustomDateTimeRangePicker } from '../components/datetime/react-widgets/date_time_range_picker';
-import { TextInput } from '../components/input_field';
-import { NumberInput, NumberRangeInput } from '../components/number_input_field';
+import { DateTimePickers } from '../components/datetime/react-widgets';
+import { TextAreaInput, TextInput } from '../components/input_field';
+import {
+  NumberInput,
+  NumberRangeInput,
+} from '../components/number_input_field';
 import { SelectField } from '../components/select_field';
 import { UnsupportedField } from '../components/unsupported_field';
-import { IWidgets } from '../../dist/';
+import { ResetBtn, SubmitBtn } from '../wrappers/buttons';
 import {
   ArrayItemAddBtn,
   ArrayItemRemoveBtn,
@@ -18,7 +21,6 @@ import {
   ObjectItemWrapper,
   ObjectWrapper,
 } from '../wrappers/component_wrappers';
-import { SubmitBtn, ResetBtn } from '../wrappers/buttons';
 
 export const defaultWidgets: IWidgets = {
   number: {
@@ -32,19 +34,22 @@ export const defaultWidgets: IWidgets = {
   string: {
     default: TextInput,
     enum: SelectField,
+    textarea: TextAreaInput,
   },
   boolean: {
     default: CheckBoxField,
   },
-  date: { default: ReactDatePicker },
-  datetime: { default: CustomDateTimePicker },
-  daterange: { default: ReactDateRangePicker },
-  datetimerange: { default: CustomDateTimeRangePicker },
   object: {},
   array: {
     enum: SelectField,
   },
-  custom: {},
+  custom: {
+    date: { widgets: { default: ReactDatePicker } },
+    datetime: { widgets: { default: DateTimePickers.DateTime } },
+    daterange: { widgets: { default: ReactDateRangePicker } },
+    datetimerange: { widgets: { default: DateTimePickers.DateTimeRange } },
+    ipv4: { widgets: { default: TextInput, 'ipv4:masked': NumberInput } },
+  },
   unsupported: { default: UnsupportedField },
   wrapper: {
     form: FormWrapper,

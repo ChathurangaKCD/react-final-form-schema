@@ -1,14 +1,16 @@
+import { ResetBtnProps, SubmitBtnProps } from './buttons.interface';
 import {
   CheckBoxInputProps,
   DatePickerProps,
   DateRangePickerProps,
   DateTimePickerProps,
   DateTimeRangePickerProps,
+  InputFieldProps,
   NumberInputProps,
   SelectFieldProps,
   TextInputProps,
-  InputFieldProps,
 } from './components.interfaces';
+import { RenderFnProps } from './renderers.interfaces';
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -19,9 +21,8 @@ import {
   ObjectItemWrapperProps,
   ObjectWrapperProps,
 } from './wrappers.interfaces';
-import { SubmitBtnProps, ResetBtnProps } from './buttons.interface';
 
-export type Widget<T> = React.FC<T>;
+export type Widget<T = InputFieldProps> = React.FC<T>;
 
 export type WrapperTypes =
   | 'form'
@@ -56,7 +57,6 @@ export interface IWidgets {
   datetimerange: { default: Widget<DateTimeRangePickerProps> };
   object: {};
   array: { enum: Widget<SelectFieldProps> };
-  custom: {};
   unsupported: { default: Widget<InputFieldProps> };
   wrapper: {
     form: Widget<FormWrapperProps>;
@@ -66,10 +66,18 @@ export interface IWidgets {
     'array:item': Widget<ArrayItemWrapperProps>;
     'array:itemremove': Widget<ArrayItemRemoveBtnProps>;
     'array:itemadd': Widget<ArrayItemAddBtnProps>;
-    field: Widget<any>;
+    field: Widget<FieldWrapperProps>;
   };
   buttons: {
     submit: Widget<SubmitBtnProps>;
     reset: Widget<ResetBtnProps>;
   };
+  custom: {
+    [x: string]: CustomField;
+  };
+}
+
+export interface CustomField {
+  widgets: { default: Widget; [x: string]: Widget };
+  // renderer?: React.FC<RenderFnProps>;
 }

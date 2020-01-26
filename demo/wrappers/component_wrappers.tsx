@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { IWrapper } from '../../dist/';
+import { RenderCount } from './render_count';
 
 export function FormWrapper({
   children,
@@ -9,6 +10,7 @@ export function FormWrapper({
 }: IWrapper.FormWrapperProps) {
   return (
     <Form>
+      <RenderCount />
       {children}
       {submitBtn}
       {resetBtn}
@@ -29,6 +31,7 @@ export function ObjectWrapper({
     );
   return (
     <Col md={12} className="ml-2">
+      <RenderCount />
       <Form.Row className="border-left mb-2">
         {titleComp}
         {children}
@@ -40,9 +43,13 @@ export function ObjectWrapper({
 export function ObjectItemWrapper({
   level,
   children,
-  ...wrapperProps
 }: IWrapper.ObjectItemWrapperProps) {
-  return <>{children}</>;
+  return (
+    <>
+      <RenderCount />
+      {children}
+    </>
+  );
 }
 
 export function ArrayWrapper({
@@ -59,6 +66,7 @@ export function ArrayWrapper({
     );
   return (
     <Col md={12} className="ml-2">
+      <RenderCount />
       <Form.Row className="border-left mb-2">
         {titleComp}
         {children}
@@ -83,7 +91,9 @@ export function ArrayItemWrapper({
   );
   return (
     <Col md={12} className="ml-2">
-      <Form.Row {...wrapperProps} className="border-left mb-2">
+      <RenderCount />
+
+      <Form.Row className="border-left mb-2">
         {wrappedChildren}
         {buttons}
       </Form.Row>
@@ -126,5 +136,10 @@ export function ArrayItemAddBtn({
 }
 
 export function FieldWrapper({ level, children }: IWrapper.FieldWrapperProps) {
-  return <Col md={level === 1 ? 12 : 6}>{children}</Col>;
+  return (
+    <Col md={level === 1 ? 12 : 6}>
+      <RenderCount />
+      {children}
+    </Col>
+  );
 }
