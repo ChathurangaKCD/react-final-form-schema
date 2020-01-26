@@ -1,4 +1,4 @@
-import { IWidgets } from '../../dist/';
+import { IWidgets } from '../../dist/interfaces/widgets.interfaces';
 import { CheckBoxField } from '../components/checkbox_field.';
 import { ReactDatePicker } from '../components/datetime/react-dates/date_picker';
 import { ReactDateRangePicker } from '../components/datetime/react-dates/date_range_picker';
