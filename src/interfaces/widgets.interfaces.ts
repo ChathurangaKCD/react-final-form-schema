@@ -78,7 +78,6 @@ export interface IWidgets {
     submitText: string;
     resetText: string;
   };
-  formerror: Widget<any>;
   custom: {
     [x: string]: CustomField;
   };

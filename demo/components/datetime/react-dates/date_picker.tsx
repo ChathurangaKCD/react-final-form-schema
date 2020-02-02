@@ -26,24 +26,14 @@ export function ReactDatePicker({
   input: { value, onChange, ...input },
   error,
 }: DatePickerProps) {
-  const [date, setDate] = useState<Date>(value ? moment(value) : null);
-
   const [isFocussed, setIsFocussed] = useState<boolean>(false);
-  const onChangeDate = useCallback(
-    (newVal: Date) => {
-      setDate(newVal);
-      const val = newVal === null ? null : newVal.format(DATE_FORMAT);
-      onChange(val);
-    },
-    [onChange]
-  );
   return (
     <Form.Group controlId={input.name}>
       {label && <Form.Label className="float-left">{label}</Form.Label>}
       <SingleDatePicker
         id={input.name}
-        date={date}
-        onDateChange={onChangeDate}
+        date={value}
+        onDateChange={onChange}
         focused={!!isFocussed}
         onFocusChange={({ focused }) => setIsFocussed(!!focused)}
         isOutsideRange={() => false}
