@@ -8,21 +8,22 @@ function useControlledNumberInput(
   inComingValue: number,
   notifyChange: (nextVal: number) => void
 ) {
-  const [value, setValue] = useState<string | number>(inComingValue);
-  const onChange = useCallback(
-    e => {
-      const nextVal = e.target.value;
-      setValue(nextVal);
-      // number <=> text '0.', '0.00'
-      // eslint-disable-next-line
-      if (inComingValue != nextVal) {
-        notifyChange(Number(nextVal));
-      }
-    },
-    [inComingValue, notifyChange]
-  );
-  const strVal = value.toString();
-  return { value: strVal, onChange };
+  // const [value, setValue] = useState<string | number>(inComingValue);
+  // const onChange = useCallback(
+  //   e => {
+  //     const nextVal = e.target.value;
+  //     setValue(nextVal);
+  //     // number <=> text '0.', '0.00'
+  //     // eslint-disable-next-line
+  //     if (inComingValue != nextVal) {
+  //       notifyChange(Number(nextVal));
+  //     }
+  //   },
+  //   [inComingValue, notifyChange]
+  // );
+  // const strVal = value.toString();
+  // return { value: strVal, onChange };
+  return { value: inComingValue, onChange: notifyChange };
 }
 
 export function NumberInput({

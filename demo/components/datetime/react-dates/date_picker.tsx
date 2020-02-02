@@ -6,10 +6,20 @@ import 'react-dates/lib/css/_datepicker.css';
 import { Form } from 'react-bootstrap';
 import { DatePickerProps } from '../../../../dist/interfaces/components.interfaces';
 import { getErrorMessage } from './../../../wrappers/error_messages';
+import {
+  formatDate,
+  formatDateRange,
+  parseDate,
+  parseDateRange,
+} from '../date_utils';
+import { ReactDateRangePicker } from './date_range_picker';
 
 type Date = moment.Moment | null;
 
 const DATE_FORMAT = 'YYYY-MM-DD';
+
+ReactDatePicker.parse = parseDate;
+ReactDatePicker.format = formatDate;
 
 export function ReactDatePicker({
   label,

@@ -36,8 +36,7 @@ export function CustomDateTimeRangePicker({
           uiSchema={uiSchema}
           error={false}
           label="from"
-          dateOnly={false}
-        ></CustomDateTimePicker>
+        />
       </Col>
       <Col>
         <CustomDateTimePicker
@@ -46,9 +45,8 @@ export function CustomDateTimeRangePicker({
           required={required}
           uiSchema={uiSchema}
           error={false}
-          dateOnly={false}
           label="to"
-        ></CustomDateTimePicker>
+        />
       </Col>
       {error && (
         <Form.Control.Feedback type="invalid">

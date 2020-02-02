@@ -33,14 +33,12 @@ export interface SelectFieldProps extends InputFieldProps {
 export interface DateTimePickerProps extends InputFieldProps {
   min?: string | null;
   max?: string | null;
-  dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
 }
 export interface DateTimeRangePickerProps extends InputFieldProps {
   min?: string | null;
   max?: string | null;
-  dateOnly: boolean;
   readOnly?: boolean;
   required: boolean;
 }

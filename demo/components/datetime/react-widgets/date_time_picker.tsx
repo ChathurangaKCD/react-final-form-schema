@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { DateTimePicker } from 'react-widgets';
 import { DateTimePickerProps } from '../../../../dist/interfaces/components.interfaces';
 import { getErrorMessage } from './../../../wrappers/error_messages';
+import moment from 'moment';
 
 function useParsedDate(value: string | null) {
   return useMemo(() => {
@@ -16,7 +17,6 @@ export function CustomDateTimePicker({
   max = null,
   input: { name, onChange, value, ...input },
   readOnly = false,
-  dateOnly = false,
   required = false,
   error,
 }: DateTimePickerProps) {
@@ -26,6 +26,7 @@ export function CustomDateTimePicker({
 
   const onChangeValue = useCallback(
     (nextValue: Date | undefined) => {
+      console.log('IS moment', moment.isMoment(nextValue), typeof nextValue);
       const next = nextValue ? nextValue.toISOString() : null;
       onChange(next);
     },

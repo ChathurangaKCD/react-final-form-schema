@@ -1,13 +1,13 @@
 import arrayMutators from 'final-form-arrays';
 import createDecorator from 'final-form-focus';
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { SchemaFormProps } from '../interfaces/form.interfaces';
 import { SchemaRenderer } from '../renderers/schema_renderer';
 import { SchemaContextProvider } from './schema_context';
 import { useSchemaValidator } from './schema_validator';
 import { validateData } from './data_validator';
-
+import { SchemaValidationError } from './schema_error';
 const focusOnError = createDecorator();
 
 export function SchemaForm({
@@ -18,11 +18,15 @@ export function SchemaForm({
   onSubmit,
   onValueChange,
 }: SchemaFormProps) {
+  const [formKey, setFormKey] = useState<number>(Date.now);
   const FormWrapper = widgets.wrapper.form;
   const SubmitBtn = widgets.buttons.submit;
   const ResetBtn = widgets.buttons.reset;
+  const SubmitBtnText = widgets.buttons.submitText;
+  const ResetBtnText = widgets.buttons.resetText;
   const schemaValidator = useSchemaValidator(schema);
-  if (schemaValidator.state === 'invalid') return <h5>"Schema Error"</h5>;
+  if (schemaValidator.state === 'invalid')
+    throw new SchemaValidationError(schema, schemaValidator.errors);
   else if (
     schemaValidator.state === 'validating' ||
     schemaValidator.schema === null
@@ -35,6 +39,7 @@ export function SchemaForm({
       widgets={widgets}
     >
       <Form
+        key={formKey}
         onSubmit={onSubmit}
         initialValues={{ ...initialValues }}
         subscription={{ submitting: true, pristine: true }}
@@ -49,11 +54,6 @@ export function SchemaForm({
           })(values);
           return er;
         }}
-        // validate={validateData(schemaValidator.schema || {}, {
-        //   allErrors: true,
-        //   $data: true,
-        //   jsonPointers: true,
-        // })}
         decorators={[focusOnError]}
         render={({ handleSubmit, form, submitting, pristine }) => {
           return (
@@ -62,7 +62,7 @@ export function SchemaForm({
               submitBtn={
                 <SubmitBtn
                   type="submit"
-                  text={'Submit'}
+                  text={SubmitBtnText || 'Submit'}
                   submitting={submitting}
                   disabled={submitting || pristine}
                 />
@@ -70,8 +70,8 @@ export function SchemaForm({
               resetBtn={
                 <ResetBtn
                   type="button"
-                  text={'Reset'}
-                  onClick={form.reset}
+                  text={ResetBtnText || 'Reset'}
+                  onClick={() => setFormKey(Date.now())}
                   submitting={submitting}
                   disabled={submitting || pristine}
                 />

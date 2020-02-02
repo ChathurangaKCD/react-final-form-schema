@@ -28,7 +28,12 @@ export function RenderDateInput({
   const validators = useGetValidators(schema, null, required);
   return (
     <FieldWrapper level={level} uiSchema={uiSchema}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        parse={DatePickerWidget.parse}
+        format={DatePickerWidget.format}
+      >
         {({ input, meta }) => (
           <DatePickerWidget
             label={schema.title}
@@ -58,11 +63,15 @@ export function RenderDateTimeInput({
   const validators = useGetValidators(schema, null, required);
   return (
     <FieldWrapper level={level} uiSchema={uiSchema}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        parse={DateTimePickerWidget.parse}
+        format={DateTimePickerWidget.format}
+      >
         {({ input, meta }) => (
           <DateTimePickerWidget
             label={schema.title}
-            dateOnly={schema.type === 'date'}
             input={input}
             uiSchema={uiSchema}
             required={false}

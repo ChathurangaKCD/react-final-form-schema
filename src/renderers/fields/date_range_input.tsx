@@ -9,6 +9,7 @@ import { RenderFnProps } from '../../interfaces/renderers.interfaces';
 import { FieldWrapperProps } from '../../interfaces/wrappers.interfaces';
 import { getFieldName } from '../../utils/schema_path_utils';
 import { useGetValidators } from '../../utils/validators';
+import moment from 'moment';
 interface RenderDateInputFnProps extends RenderFnProps {}
 
 export function RenderDateRangeInput({
@@ -28,7 +29,12 @@ export function RenderDateRangeInput({
   const validators = useGetValidators(schema, null, required);
   return (
     <FieldWrapper level={level} uiSchema={uiSchema}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        parse={DateRangePickerWidget.parse}
+        format={DateRangePickerWidget.format}
+      >
         {({ input, meta }) => (
           <DateRangePickerWidget
             label={schema.title}
@@ -59,11 +65,15 @@ export function RenderDateTimeRangeInput({
   const validators = useGetValidators(schema, null, required);
   return (
     <FieldWrapper level={level} uiSchema={uiSchema}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        parse={DateTimeRangePickerWidget.parse}
+        format={DateTimeRangePickerWidget.format}
+      >
         {({ input, meta }) => (
           <DateTimeRangePickerWidget
             label={schema.title}
-            dateOnly={schema.type === 'date'}
             input={input}
             uiSchema={uiSchema}
             required={false}

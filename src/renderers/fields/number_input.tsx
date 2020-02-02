@@ -29,7 +29,11 @@ export function RenderNumberInput({
   const FieldWrapper = useWrapper<FieldWrapperProps>('field');
   return (
     <FieldWrapper level={level} uiSchema={uiSchema}>
-      <Field name={getFieldName(dataPath)} {...validators}>
+      <Field
+        name={getFieldName(dataPath)}
+        {...validators}
+        parse={value => Number(value)}
+      >
         {({ input, meta }) => (
           <NumberInputWidget
             label={schema.title}

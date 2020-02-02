@@ -11,6 +11,7 @@ import {
   TextInputProps,
 } from './components.interfaces';
 import { RenderFnProps } from './renderers.interfaces';
+import React from 'react';
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -22,7 +23,10 @@ import {
   ObjectWrapperProps,
 } from './wrappers.interfaces';
 
-export type Widget<T = InputFieldProps> = React.FC<T>;
+export interface Widget<T = InputFieldProps> extends React.FC<T> {
+  parse?: (value: any) => any;
+  format?: (value: any) => any;
+}
 
 export type WrapperTypes =
   | 'form'
@@ -71,7 +75,10 @@ export interface IWidgets {
   buttons: {
     submit: Widget<SubmitBtnProps>;
     reset: Widget<ResetBtnProps>;
+    submitText: string;
+    resetText: string;
   };
+  formerror: Widget<any>;
   custom: {
     [x: string]: CustomField;
   };

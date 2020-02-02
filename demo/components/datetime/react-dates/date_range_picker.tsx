@@ -1,11 +1,12 @@
 import moment from 'moment';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { Form } from 'react-bootstrap';
 import { DateRangePickerProps } from '../../../../dist/interfaces/components.interfaces';
 import { getErrorMessage } from './../../../wrappers/error_messages';
+import { formatDateRange, parseDateRange } from '../date_utils';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -14,31 +15,22 @@ interface DateRange {
   endDate: moment.Moment | null;
 }
 
-function getInitialValue(value: any): DateRange {
-  if (!value) return { startDate: null, endDate: null };
-  const { start, end } = value;
-  const startDate = moment(start);
-  const endDate = moment(end);
-  return { startDate, endDate };
-}
+ReactDateRangePicker.parse = parseDateRange;
+ReactDateRangePicker.format = formatDateRange;
 
 export function ReactDateRangePicker({
   label,
   input: { value, onChange, onBlur, onFocus, ...input },
   error,
 }: DateRangePickerProps) {
-  const [range, setRange] = useState<DateRange>(getInitialValue(value));
-  const [focusedInput, setFocuedInput] = useState<
+  const [startDate, endDate] = value;
+  const [focusedInput, setFocusedInput] = useState<
     'startDate' | 'endDate' | null
   >(null);
   const onChangeRange = useCallback(
     (val: DateRange) => {
-      setRange(val);
-      const { startDate, endDate } = val;
-      const start = startDate === null ? null : startDate.format(DATE_FORMAT);
-      const end = endDate === null ? null : endDate.format(DATE_FORMAT);
-      const isValidRange = !!start && !!end;
-      onChange(isValidRange ? [start, end] : null);
+      const { startDate: start, endDate: end } = val;
+      onChange([start, end]);
     },
     [onChange]
   );
@@ -48,11 +40,11 @@ export function ReactDateRangePicker({
       <DateRangePicker
         startDateId={input.name + 'startDate'}
         endDateId={input.name + 'endDate'}
-        startDate={range.startDate}
-        endDate={range.endDate}
+        startDate={startDate}
+        endDate={endDate}
         onDatesChange={onChangeRange}
         focusedInput={focusedInput}
-        onFocusChange={setFocuedInput}
+        onFocusChange={setFocusedInput}
         isOutsideRange={() => false}
         small={true}
         // minDate={moment}
