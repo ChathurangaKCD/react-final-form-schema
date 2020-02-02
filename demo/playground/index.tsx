@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { SchemaForm } from '../../dist';
+import { SchemaForm } from '../../dist/index';
 import defaultSchema from '../form-example/schema.json';
 import defaultUiSchema from '../form-example/ui_schema.json';
 import { defaultWidgets } from '../registry/widget_list';
@@ -52,6 +52,8 @@ export function Playground() {
           onSubmit={onSubmit}
           widgets={defaultWidgets}
           onValueChange={dataRef.update}
+          submitBtnText="Submit"
+          resetBtnText="Reset."
         ></SchemaForm>
       </TabPanel>
       <TabPanel>

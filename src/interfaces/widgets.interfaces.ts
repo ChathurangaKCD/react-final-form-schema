@@ -1,3 +1,4 @@
+import React from 'react';
 import { ResetBtnProps, SubmitBtnProps } from './buttons.interface';
 import {
   CheckBoxInputProps,
@@ -10,8 +11,6 @@ import {
   SelectFieldProps,
   TextInputProps,
 } from './components.interfaces';
-import { RenderFnProps } from './renderers.interfaces';
-import React from 'react';
 import {
   ArrayItemAddBtnProps,
   ArrayItemRemoveBtnProps,
@@ -75,8 +74,6 @@ export interface IWidgets {
   buttons: {
     submit: Widget<SubmitBtnProps>;
     reset: Widget<ResetBtnProps>;
-    submitText: string;
-    resetText: string;
   };
   custom: {
     [x: string]: CustomField;

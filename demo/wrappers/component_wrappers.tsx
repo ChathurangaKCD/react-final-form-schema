@@ -1,15 +1,16 @@
 import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { IWrapper } from '../../dist/';
+import { IWrapper } from '../../dist/interfaces/';
 import { RenderCount } from './render_count';
 
 export function FormWrapper({
   children,
   submitBtn,
   resetBtn,
+  onSubmit,
 }: IWrapper.FormWrapperProps) {
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <RenderCount />
       {children}
       {submitBtn}

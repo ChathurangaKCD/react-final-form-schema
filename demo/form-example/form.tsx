@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { SchemaForm } from '../../dist/';
+import { SchemaForm } from '../../dist/index';
 import formSchema from './schema.json';
 import formUiSchema from './ui_schema.json';
 import { defaultWidgets } from '../registry/widget_list';
@@ -45,6 +45,8 @@ export default function FinalForm() {
         onSubmit={onSubmit}
         widgets={defaultWidgets}
         onValueChange={dataRef.update}
+        submitBtnText="submit"
+        resetBtnText="-Reset-"
       ></SchemaForm>
       <div style={{ width: '100vw', margin: 'auto', paddingTop: '50px' }}>
         <DataSubscriber>

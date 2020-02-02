@@ -13,6 +13,10 @@ export interface SchemaFormProps {
   widgets: IWidgets;
   onSubmit: (val: any) => void;
   onValueChange?: (val: any) => void;
+  submitBtnText: string;
+  resetBtnText: string;
+  hideSubmit?: boolean | undefined;
+  hideReset?: boolean | undefined;
 }
 
 export interface SchemaContextProps {

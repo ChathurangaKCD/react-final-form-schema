@@ -17,13 +17,15 @@ export function SchemaForm({
   widgets,
   onSubmit,
   onValueChange,
+  submitBtnText,
+  resetBtnText,
+  hideSubmit = false,
+  hideReset = false,
 }: SchemaFormProps) {
   const [formKey, setFormKey] = useState<number>(Date.now);
   const FormWrapper = widgets.wrapper.form;
   const SubmitBtn = widgets.buttons.submit;
   const ResetBtn = widgets.buttons.reset;
-  const SubmitBtnText = widgets.buttons.submitText;
-  const ResetBtnText = widgets.buttons.resetText;
   const schemaValidator = useSchemaValidator(schema);
   if (schemaValidator.state === 'invalid')
     throw new SchemaValidationError(schema, schemaValidator.errors);
@@ -60,21 +62,25 @@ export function SchemaForm({
             <FormWrapper
               onSubmit={handleSubmit}
               submitBtn={
-                <SubmitBtn
-                  type="submit"
-                  text={SubmitBtnText || 'Submit'}
-                  submitting={submitting}
-                  disabled={submitting || pristine}
-                />
+                hideSubmit ? null : (
+                  <SubmitBtn
+                    type="submit"
+                    text={submitBtnText || 'Submit'}
+                    submitting={submitting}
+                    disabled={submitting || pristine}
+                  />
+                )
               }
               resetBtn={
-                <ResetBtn
-                  type="button"
-                  text={ResetBtnText || 'Reset'}
-                  onClick={() => setFormKey(Date.now())}
-                  submitting={submitting}
-                  disabled={submitting || pristine}
-                />
+                hideReset ? null : (
+                  <ResetBtn
+                    type="button"
+                    text={resetBtnText || 'Reset'}
+                    onClick={() => setFormKey(Date.now())}
+                    submitting={submitting}
+                    disabled={submitting || pristine}
+                  />
+                )
               }
             >
               <SchemaRenderer
