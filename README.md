@@ -4,7 +4,7 @@ Generates forms using schema definitions.
 
 `Schema` - Required data format (structure and validations) is defined with a [JSON schema][json-schema].
 
-- Refer to [SCHEMA.md][schema.md] for supported types
+- Refer to [SCHEMA.md][SCHEMA.md] for supported types
 
 `UI Schema` - additional ui customizations are defined in the ui schema. (layouts, styles & custom widgets).
 
