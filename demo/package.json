@@ -17,7 +17,7 @@
     "final-form-arrays": "^3.0.2",
     "lodash": "^4.17.15",
     "lodash.get": "^4.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "monaco-editor": "^0.19.2",
     "playground": "^0.7.0",
     "react-app-polyfill": "^1.0.0",
